@@ -1,0 +1,22 @@
+[
+  {
+    "String": ";",
+    "Type": "end of line"
+  },
+  {
+    "String": "=",
+    "Type": "Operator"
+  },
+  {
+    "String": "+",
+    "Type": "Operator"
+  },
+  {
+    "String": "int",
+    "Type": "Declaration"
+  },
+  {
+    "String": "main",
+    "Type": "Function"
+  }
+]
