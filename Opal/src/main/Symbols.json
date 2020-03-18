@@ -1,22 +1,22 @@
 [
   {
-    "String": ";",
-    "Type": "end of line"
+    "Reserved_Word": ";",
+    "Type": 1
   },
   {
-    "String": "=",
-    "Type": "Operator"
+    "Reserved_Word": "=",
+    "Type": 2
   },
   {
-    "String": "+",
-    "Type": "Operator"
+    "Reserved_Word": "+",
+    "Type": 3
   },
   {
-    "String": "int",
-    "Type": "Declaration"
+    "Reserved_Word": "int",
+    "Type": 4
   },
   {
-    "String": "main",
-    "Type": "Function"
+    "Reserved_Word": "main",
+    "Type": 5
   }
 ]
