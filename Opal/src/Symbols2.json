@@ -1,0 +1,26 @@
+[
+  {
+    "Reserved_Word": ";",
+    "Type": 1
+  },
+  {
+    "Reserved_Word": "=",
+    "Type": 2
+  },
+  {
+    "Reserved_Word": "+",
+    "Type": 3
+  },
+  {
+    "Reserved_Word": "int",
+    "Type": 4
+  },
+  {
+    "Reserved_Word": "main",
+    "Type": 5
+  },
+  {
+    "Reserved_Word": "main",
+    "Type": 5
+  }
+]
