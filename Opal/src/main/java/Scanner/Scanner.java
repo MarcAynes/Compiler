@@ -93,6 +93,10 @@ public class Scanner {
                             }
                         } else {
                             token += frase[i];
+
+                            if (i+1 == frase.length){
+                                tokens.add(token);
+                            }
                         }
 
                     }
