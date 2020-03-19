@@ -13,11 +13,11 @@ public class ConstantExpNode extends ExpNode {
     public ConstantExpNode(String value) {
         this.value = Double.valueOf(value);
     }
-
+    @Override
     public double getValue() {
         return value;
     }
-
+    @Override
     public int getType() {
         return ExpNode.CONSTANT_NODE;
     }
