@@ -22,7 +22,12 @@ public class Parser {
 
         if (tokens != null){
             for (Token token: tokens) {
-                taulaS.search(token.valor); //que retorna si no hi es?
+                if(taulaS.search(token.valor) == null){
+
+                }
+                else{
+
+                }
             }
         }
     }
