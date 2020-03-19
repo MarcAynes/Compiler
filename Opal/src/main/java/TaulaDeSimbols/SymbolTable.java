@@ -6,6 +6,19 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.HashMap;
 
+/*
+*
+* On create: create a hash table and fill it with the information on the file Symbols.json
+*
+* Add: add a symbol to the hash map if this object does not exist, and return true else return false
+*
+* Search: search an element, if the element could not be found returns null, if the element exists inside the hash map, return this element
+*
+* delete: remove the especific element if this exists, returns null if this object could not be found
+*
+* update: remove and create a new object, return true if it was successful else return false
+ */
+
 public class SymbolTable {
 
     HashMap<String, Symbol> Table = new HashMap<String, Symbol>();

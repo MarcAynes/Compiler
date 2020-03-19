@@ -2,7 +2,7 @@ package TaulaDeSimbols;
 
 public class Symbol {
 
-    String Reserved_Word;
+    public String Reserved_Word;
     int Type;
     /*
     0 - variable
