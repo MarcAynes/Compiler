@@ -3,6 +3,11 @@ package ErrorHandler;
 import java.util.LinkedList;
 
 public class ErrorHandler {
+    private LinkedList<String> error;
+
+    public ErrorHandler(){
+        this.error  = new LinkedList<>();
+    }
 
     public LinkedList<String> getError() {
         return error;
@@ -12,41 +17,17 @@ public class ErrorHandler {
         this.error = error;
     }
 
-    private LinkedList<String> error;
-
-
     public void mostrarErrors(){
-
-
-    try {
-
-
-    for(int i=0;i<error.size();i++ ){
-
-        System.out.println( error.get(i));
-
-
-
-    }
-    }catch (NullPointerException e){
-
-
-    }
-
-
-
-
+         if(this.error.size() > 0) {
+             for (String anError : this.error) {
+                 System.out.println(anError);
+             }
+         }
+         else
+            System.out.println("Procés finalitzat amb èxit.");
     }
 
     public void addError(String s){
-
-        error.add(s);
-
-
-
-
+        this.error.add(s);
     }
-
-
-
 }

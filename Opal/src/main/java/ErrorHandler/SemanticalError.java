@@ -2,16 +2,7 @@ package ErrorHandler;
 
 public class SemanticalError extends ErrorHandler {
 
-
-    public SemanticalError(String s){
-
-        String a;
-        a= "S'ha trobat un error semantic : " + s +".";
-
-        addError(a);
-
-
+    public void addSemanticalError(String s){
+        addError("S'ha trobat un error semàntic : " + s +".");
     }
-
-
 }

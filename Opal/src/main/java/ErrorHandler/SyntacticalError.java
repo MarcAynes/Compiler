@@ -1,20 +1,10 @@
 package ErrorHandler;
 
+import java.util.LinkedList;
+
 public class SyntacticalError extends ErrorHandler {
 
-
-
-    public  SyntacticalError(String s){
-
-        String a;
-        a= "S'ha trobat un error sintactic : " + s +".";
-
-        addError(a);
-
-
-
+    public void addSyntacticError(String s){
+        addError("S'ha trobat un error sintàctic : " + s +".");
     }
-
-
-
 }
