@@ -52,10 +52,9 @@ public class Node implements trieInt {
         } else {
 
             if (value >= 1) {
-
-                    retorna.frases = new char[1][];
-                    retorna.frases[0] = paraula;
-                    retorna.nombre = 1;
+                retorna.frases = new char[1][];
+                retorna.frases[0] = paraula;
+                retorna.nombre = 1;
             }
         }
         return retorna;
@@ -148,3 +147,4 @@ public class Node implements trieInt {
     }
 
 }
+

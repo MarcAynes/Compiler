@@ -3,7 +3,8 @@ package TaulaDeSimbols;
 public class Symbol {
 
     public String Reserved_Word;
-    int Type;
+    public int Type;
+
     /*
     0 - variable
     1 - final de linia
@@ -14,7 +15,10 @@ public class Symbol {
 
      */
 
-    int variable_type;
+    public Symbol(String reserved_Word, int Type){
+        this.Reserved_Word = reserved_Word;
+        this.Type = Type;
+    }
 
 
 }

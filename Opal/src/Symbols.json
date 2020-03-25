@@ -12,7 +12,19 @@
     "Type": 3
   },
   {
+    "Reserved_Word": "-",
+    "Type": 3
+  },
+  {
     "Reserved_Word": "int",
+    "Type": 4
+  },
+  {
+    "Reserved_Word": "char",
+    "Type": 4
+  },
+  {
+    "Reserved_Word": "float",
     "Type": 4
   },
   {

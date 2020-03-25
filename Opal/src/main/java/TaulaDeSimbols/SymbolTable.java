@@ -23,11 +23,11 @@ public class SymbolTable {
 
     HashMap<String, Symbol> Table = new HashMap<String, Symbol>();
 
-    public SymbolTable(){
+    public SymbolTable(String file){
 
         Gson gson = new Gson();
         try {
-            Symbol[] sym = gson.fromJson(new FileReader("src/Symbols.json"), Symbol[].class);
+            Symbol[] sym = gson.fromJson(new FileReader(file), Symbol[].class);
             for (int i = 0; i < sym.length; i++){
                 add(sym[i]);
             }
@@ -40,12 +40,12 @@ public class SymbolTable {
 
     public Symbol search(String s){
 
-        return Table.get(s);
+        return this.Table.get(s);
     }
 
     public boolean add(Symbol s){
-        if (Table.get(s.Reserved_Word) == null) {
-            Table.put(s.Reserved_Word, s);
+        if (this.Table.get(s.Reserved_Word) == null) {
+            this.Table.put(s.Reserved_Word, s);
             return true;
         }else{
             return false;
@@ -54,7 +54,7 @@ public class SymbolTable {
 
     public boolean delete(Symbol s){
 
-        return Table.remove(s.Reserved_Word, s);
+        return this.Table.remove(s.Reserved_Word, s);
     }
 
     public int getType(String s){

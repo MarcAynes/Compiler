@@ -17,7 +17,7 @@ import java.util.List;
 public class Scanner {
 
     private Trie trie = new Trie();
-    List<String> tokens = new ArrayList<String>();
+    List<String> tokens = new ArrayList<>();
     private BufferedReader br;
 
     public Scanner(String file){
@@ -114,4 +114,16 @@ public class Scanner {
         return tokens.remove(0);
     }
 
+    public List<String> getTokens() {
+        List<String> tokens = new ArrayList<>();
+        for(int i = 0; i < 50; i++) {
+            String token = getToken();
+            if (token != null) {
+                tokens.add(token);
+            }else{
+                break;
+            }
+        }
+        return tokens;
+    }
 }
