@@ -1,7 +1,6 @@
 package Parser;
 
 import Scanner.Scanner;
-import Scanner.Token;
 import TaulaDeSimbols.Symbol;
 import TaulaDeSimbols.SymbolTable;
 
@@ -9,7 +8,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Parser {
-    final String[] t = {"float", "char", "int"};
+    final String[] tipus = {"float", "char", "int"};
+    final String[] operacio = {"+", "-"};
+
     private Scanner scanner;
     private SymbolTable taulaS;
 
@@ -29,8 +30,9 @@ public class Parser {
             for (String token: tokens) {
                 switch (nivell){
                     case 0:
-                        if(Arrays.asList(t).contains(token)) { //miro si es declaració
-                            if(taulaS.search(token) != null){ //miro que estigui a la taula de simbols i sigui una declaracio
+                        if(Arrays.asList(tipus).contains(token)) { //miro si es declaració
+                            Symbol s = taulaS.search(token);
+                            if(s != null && s.Type == 4){ //miro que estigui a la taula de simbols i sigui una declaracio
                                 //afegir D i tV a l'arbre
                                 nivell = 1;
                                 op = 'D'; //equival a afegir D a l'arbre
@@ -122,6 +124,9 @@ public class Parser {
                             System.out.println("OK");
                             nivell = 0;
                             op = ' ';
+                        }
+                        else if(op == 'A' && (Arrays.asList(operacio).contains(token))){
+                            nivell = 3;
                         }
                         else{
                             nivell = -1;
