@@ -85,6 +85,7 @@ public class Parser {
                         }
                         break;
                     case 3:
+                        boolean decimal = false;
                         nivell = 4;
                         char[] limits = {0, 0};
                         //només arribo aquí si és ASSIGNACIÓ
@@ -113,6 +114,17 @@ public class Parser {
 
                         for (char c: ch) {
                             if (c > limits[1] || c < limits[0]){ //els valors rebuts surten del rang
+                                if(c == '.'){
+                                    if(!decimal){
+                                        decimal = true;
+                                        continue;
+                                    }
+                                    else{
+                                        error = "Valors fora de rang al assignar";
+                                        nivell = -1;
+                                        break;
+                                    }
+                                }
                                 nivell = -1;
                                 error = "Valors fora del rang al assignar";
                             }
@@ -141,7 +153,7 @@ public class Parser {
                 }
             }
 
-            if(nivell != 0){ //detecta errors a l'ultima linia
+            if(nivell > 0){ //detecta errors a l'ultima linia
                 System.out.println("S'esperava ;");
             }
         }
