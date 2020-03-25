@@ -18,5 +18,10 @@
   {
     "Reserved_Word": "main",
     "Type": 5
+  },
+  {
+    "Reserved_Word": "-",
+    "Type": 3
   }
+
 ]
