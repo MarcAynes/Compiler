@@ -1,17 +1,17 @@
 import Parser.Parser;
+import Scanner.Scanner;
 import TaulaDeSimbols.SymbolTable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        String codi;
+        //System.out.println(args[0]);
+        SymbolTable taulaS = new SymbolTable("src/Symbols.json");
+        Scanner scanner = new Scanner("src/codi");
+        Parser parser = new Parser(taulaS, scanner);
 
-        SymbolTable symbolTable = new SymbolTable();
-        Parser parser = new Parser(symbolTable);
-
-        //llegir fitxer codi i passar-ho a string
-        codi = "int a;"; //codi prova
-
-        //inicar Parser
-        parser.syntaxAnalysis(codi);
+        parser.syntaxAnalysis();
     }
 }

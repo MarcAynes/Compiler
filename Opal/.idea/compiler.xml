@@ -9,8 +9,5 @@
         <module name="Opal" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="Opal" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
