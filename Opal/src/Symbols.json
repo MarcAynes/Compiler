@@ -24,6 +24,10 @@
     "Type": 4
   },
   {
+    "Reserved_Word": "float",
+    "Type": 4
+  },
+  {
     "Reserved_Word": "main",
     "Type": 5
   },

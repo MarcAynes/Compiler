@@ -8,9 +8,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Parser {
-    final String[] tipus = {"float", "char", "int"};
-    final String[] operacio = {"+", "-"};
-
     private Scanner scanner;
     private SymbolTable taulaS;
 
@@ -30,15 +27,15 @@ public class Parser {
             for (String token: tokens) {
                 switch (nivell){
                     case 0:
-                        if(Arrays.asList(tipus).contains(token)) { //miro si es declaració
+                        //if(Arrays.asList(tipus).contains(token)) { //miro si es declaració
                             Symbol s = taulaS.search(token);
                             if(s != null && s.Type == 4){ //miro que estigui a la taula de simbols i sigui una declaracio
                                 //afegir D i tV a l'arbre
                                 nivell = 1;
                                 op = 'D'; //equival a afegir D a l'arbre
+                                break;
                             }
-                            break;
-                        }
+                        //}
                         else { //estic fent una assignació
                             nivell = 1;
                             op = 'A';
@@ -62,7 +59,7 @@ public class Parser {
                         }
                         else{
                             nivell = -1;
-                            error = "Variable '" + newVar + "' no declarada";
+                            error = "Variable '" + token + "' no declarada";
                         }
                         break;
                     case 2:
@@ -132,12 +129,13 @@ public class Parser {
                         break;
 
                     case 4:
+                        Symbol sym = taulaS.search(token);
                         if(op == 'A' && token.equals(";")){
                             System.out.println("OK");
                             nivell = 0;
                             op = ' ';
                         }
-                        else if(op == 'A' && (Arrays.asList(operacio).contains(token))){
+                        else if(op == 'A' && sym != null && sym.Type == 3){
                             nivell = 3;
                         }
                         else{
