@@ -135,6 +135,10 @@ public class Parser {
                     break;
                 }
             }
+
+            if(nivell != 0){ //detecta errors a l'ultima linia
+                System.out.println("S'esperava ;");
+            }
         }
     }
 }
