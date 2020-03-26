@@ -32,8 +32,43 @@
     "Type": 5
   },
   {
-    "Reserved_Word": "-",
-    "Type": 3
+    "Reserved_Word": "0",
+    "Type": 6
+  },
+  {
+    "Reserved_Word": "1",
+    "Type": 6
+  },
+  {
+    "Reserved_Word": "2",
+    "Type": 6
+  },
+  {
+    "Reserved_Word": "3",
+    "Type": 6
+  },
+  {
+    "Reserved_Word": "4",
+    "Type": 6
+  },
+  {
+    "Reserved_Word": "5",
+    "Type": 6
+  },
+  {
+    "Reserved_Word": "6",
+    "Type": 6
+  },
+  {
+    "Reserved_Word": "7",
+    "Type": 6
+  },
+  {
+    "Reserved_Word": "8",
+    "Type": 6
+  },
+  {
+    "Reserved_Word": "9",
+    "Type": 6
   }
-
 ]

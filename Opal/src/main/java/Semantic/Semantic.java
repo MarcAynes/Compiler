@@ -50,6 +50,19 @@ public class Semantic {
                         }
                     }
 
+                }else{
+                    if (t.varType.equals("float")){
+                        for(int i = 1; !tokens.get(i).equals(";"); i++){
+
+                            s = symbols.search(tokens.get(i));
+                            if (s.Type == 0 && !typeTable.get(s.Reserved_Word).varType.equals("char")){
+
+                                //throw new TypeException("char can not be assigned to " + typeTable.get(s.Reserved_Word).varType);
+                                sm.addSemanticalError("char can not be assigned to " + typeTable.get(s.Reserved_Word).varType);
+                                break;
+                            }
+                        }
+                    }
                 }
             }
         }else{
@@ -74,6 +87,15 @@ public class Semantic {
                             typeTable.put(s.Reserved_Word, new Tipus(s.Reserved_Word, "char"));
                         }
 
+                    }else{
+                        if (s.Reserved_Word.equals("float")){
+                            s = symbols.search(tokens.get(1));
+
+                            if (s.Type == 0){
+
+                                typeTable.put(s.Reserved_Word, new Tipus(s.Reserved_Word, "float"));
+                            }
+                        }
                     }
                 }
             }
