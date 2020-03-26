@@ -11,11 +11,7 @@ import java.util.List;
 
 public class Semantic {
     HashMap<String, Tipus> typeTable = new HashMap<String, Tipus>();
-    /*
-    *
-    * Return true   -> all correct
-    *        false  -> some problem
-     */
+    SemanticalError sm = new SemanticalError();
 
     public void semanticAnalysis(SymbolTable symbols, List<String> tokens){
 
@@ -34,7 +30,7 @@ public class Semantic {
                         if (s.Type == 0){
 
                             //throw new TypeException("Integer can not be assigned to " + typeTable.get(s.Reserved_Word).varType);
-                            SemanticalError sm = new SemanticalError("Integer can not be assigned to " + typeTable.get(s.Reserved_Word).varType);
+                            sm.addSemanticalError("Integer can not be assigned to " + typeTable.get(s.Reserved_Word).varType);
                             break;
                         }
                     }
@@ -49,7 +45,7 @@ public class Semantic {
                         if (s.Type == 0 && !typeTable.get(s.Reserved_Word).varType.equals("char")){
 
                             //throw new TypeException("char can not be assigned to " + typeTable.get(s.Reserved_Word).varType);
-                            SemanticalError sm = new SemanticalError("char can not be assigned to " + typeTable.get(s.Reserved_Word).varType);
+                            sm.addSemanticalError("char can not be assigned to " + typeTable.get(s.Reserved_Word).varType);
                             break;
                         }
                     }
@@ -82,5 +78,10 @@ public class Semantic {
                 }
             }
         }
+    }
+
+
+    public void Errors(){
+        sm.mostrarErrors();
     }
 }

@@ -3,6 +3,7 @@ package Parser;
 import ErrorHandler.SyntacticalError;
 import ErrorHandler.ErrorHandler;
 import Scanner.Scanner;
+import Semantic.Semantic;
 import TaulaDeSimbols.Symbol;
 import TaulaDeSimbols.SymbolTable;
 
@@ -14,6 +15,7 @@ public class Parser {
     private Scanner scanner;
     private SymbolTable taulaS;
     private SyntacticalError syntacticalError;
+    Semantic semantic = new Semantic();
 
     public Parser(SymbolTable taulaS, Scanner scanner){
         this.scanner = scanner;
@@ -75,7 +77,10 @@ public class Parser {
                             if(!taulaS.add(new Symbol(newVar, 0))){
                                 nivell = -1;
                                 syntacticalError.addSyntacticError("Ja existeix la variable '"+ newVar + "' a la taula de símbols");
+                            }else{
+                                semantic.semanticAnalysis(taulaS, tokens);
                             }
+
                         }
                         else if(op == 'A' && token.equals("=")){
                             nivell = 3;
@@ -138,6 +143,7 @@ public class Parser {
                             System.out.println("OK");
                             nivell = 0;
                             op = ' ';
+                            semantic.semanticAnalysis(taulaS, tokens);
                         }
                         else if(op == 'A' && sym != null && sym.Type == 3){
                             nivell = 3;
@@ -157,9 +163,9 @@ public class Parser {
 
             if(nivell > 0){ //detecta errors a l'ultima linia
                 syntacticalError.addSyntacticError("S'esperava ;");
-
                 System.out.println("S'esperava ;");
             }
         }
+        semantic.Errors(); //mostrar errors semantic
     }
 }
