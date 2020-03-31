@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
         //System.out.println(args[0]);
-        Scanner scanner = new Scanner("src/tests/test6");
+        Scanner scanner = new Scanner("src/tests/" + args[0]);
         Parser parser = new Parser(symbolTable, scanner);
 
         parser.syntaxAnalysis();
