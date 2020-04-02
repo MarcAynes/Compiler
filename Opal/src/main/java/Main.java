@@ -1,4 +1,5 @@
 
+import Adresscode.Separacio;
 import Parser.Parser;
 import Scanner.Scanner;
 import TaulaDeSimbols.SymbolTable;
@@ -14,5 +15,9 @@ public class Main {
         Parser parser = new Parser(symbolTable, scanner);
 
         parser.syntaxAnalysis();
+        scanner = new Scanner("src/tests/" + args[0]);
+        Separacio separacio=new Separacio(scanner);
+        separacio.separar();
+        int a=0;
     }
 }
