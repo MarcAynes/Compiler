@@ -65,7 +65,7 @@ public class Semantic {
 
                             s = symbols.search(tokens.get(i));
                             System.out.println(tokens.get(i));
-                            if (s != null && s.Type == 0 && !typeTable.get(s.Reserved_Word).varType.equals("float")){
+                            if (s != null && s.Type == 0 && !(typeTable.get(s.Reserved_Word).varType.equals("char") || typeTable.get(s.Reserved_Word).varType.equals("int") || typeTable.get(s.Reserved_Word).varType.equals("float"))){
 
                                 //throw new TypeException("char can not be assigned to " + typeTable.get(s.Reserved_Word).varType);
                                 sm.addSemanticalError("float can not be assigned to " + typeTable.get(s.Reserved_Word).varType);

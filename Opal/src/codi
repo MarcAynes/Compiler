@@ -7,6 +7,7 @@ b = a;
 b = 4.3;
 b = 12;
 char c;
+a = c;
 c = 5.5;
 c = a;
 c = b;
