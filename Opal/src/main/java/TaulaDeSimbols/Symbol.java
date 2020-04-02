@@ -12,6 +12,7 @@ public class Symbol {
     3 - operacio
     4 - declaracio/tipus
     5 - funcio
+    6 - numero
 
      */
 

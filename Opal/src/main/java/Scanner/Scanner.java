@@ -119,6 +119,7 @@ public class Scanner {
 
         String token = getToken();
         while(token != null){
+            
             tokens.add(token);
             token = getToken();
         }
