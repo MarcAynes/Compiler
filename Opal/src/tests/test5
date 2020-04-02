@@ -1,0 +1,5 @@
+float a;
+int b;
+a=b;
+b=a;
+a='o'+1+a -'0' +c ;

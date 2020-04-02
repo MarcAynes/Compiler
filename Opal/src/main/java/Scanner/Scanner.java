@@ -116,14 +116,12 @@ public class Scanner {
 
     public List<String> getTokens() {
         List<String> tokens = new ArrayList<>();
-        while(true) {
-            String token = getToken();
-            if (token != null) {
 
-                tokens.add(token);
-            }else{
-                break;
-            }
+        String token = getToken();
+        while(token != null){
+            
+            tokens.add(token);
+            token = getToken();
         }
         return tokens;
     }

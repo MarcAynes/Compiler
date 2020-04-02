@@ -1,0 +1,8 @@
+float a;
+a=2.2;
+a='o'+1+a -'0';
+int b;
+b=0;
+a=b+a;
+b=b+a;
+
