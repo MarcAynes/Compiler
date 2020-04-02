@@ -116,7 +116,7 @@ public class Scanner {
 
     public List<String> getTokens() {
         List<String> tokens = new ArrayList<>();
-        
+
         String token = getToken();
         while(token != null){
             tokens.add(token);
