@@ -163,7 +163,7 @@ public class Parser {
 
             if(nivell > 0){ //detecta errors a l'ultima linia
                 syntacticalError.addSyntacticError("S'esperava ;");
-                System.out.println("S'esperava ;");
+                syntacticalError.mostrarErrors();
             }
         }
         semantic.Errors(); //mostrar errors semantic
