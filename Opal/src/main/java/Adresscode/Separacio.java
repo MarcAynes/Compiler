@@ -21,11 +21,15 @@ public class Separacio {
         List<String> tokens = scanner.getTokens();
 
         int lastToken = 1;
+        int primer = 1;
         int resta=0;
+        int j=0;
+        int aqui=0;
         String tipus = new String();
         String arg1 = new String();
         String arg2= new String();
         String aux=new String();
+        String var=new String();
         int num=1;
         Operacio o ;
 
@@ -37,21 +41,33 @@ public class Separacio {
 
                     lastToken = 1;
 
+                    if(aqui==1){
+                        aqui=0;
+                        num--;
+                        o=new Operacio("=",var,"t"+num, " ");
+                        operacions.add(o);
+                        num++;
+
+                    }
+
 
                 } else {
 
                     if (lastToken == 1) {
                         lastToken=0;
+                        primer=1;
 
                         if (tokens.get(i).equals("float") || tokens.get(i).equals("int") || tokens.get(i).equals("char")) {
 
                             tipus="var";
                             arg1=tokens.get(i);
                             arg2=tokens.get(i+1);
-                            o=new Operacio(tipus,arg1,arg2);
-                            operacions.add(o);
+                            //o=new Operacio(tipus,arg1,arg2);
+                            //operacions.add(o);
                             i++;
-                            num++;
+
+
+                            //num++;
 
 
                         }else{
@@ -59,68 +75,101 @@ public class Separacio {
                             tipus="=";
                             arg1=tokens.get(i);
                             arg2="t"+num;
-                            num++;
-                            o=new Operacio(tipus,arg1,arg2);
-                            operacions.add(o);
-                            i++;
+
+                            if(tokens.get(i+3).equals(";")){
+                                arg2=tokens.get(i+2);
+                                o=new Operacio(tipus,arg1,arg2," ");
+                                operacions.add(o);
+                                i++;
+                                i++;
+
+                            }else{
+                                aqui=1;
+                                var=arg1;
+                                i++;
+
+
+                            }
+
 
                         }
 
                     }else{
 
-                        if(resta==1){
-                            num--;
-                            num--;
-                            arg1="t"+num;
-                            num++;
-                            num++;
-                            resta=0;
-                        }else{
+
                             arg1=tokens.get(i);
 
-                        }
-
-
-
-                        if(tokens.get(i+1).equals(";")){
-
-                           tipus=" ";
-                           arg2=" ";
-
-
-                           o=new Operacio(tipus,arg1,arg2);
-                           operacions.add(o);
-                           num++;
-
-                        }else{
-
                             if(tokens.get(i+1).equals("+")) {
-                                tipus = tokens.get(i + 1);
-                                arg2 = "t" + num;
-                                o = new Operacio(tipus, arg1, arg2);
-                                num++;
-                                operacions.add(o);
-                                i++;
+
+                                if(primer==1){
+                                    primer=0;
+
+                                    tipus = tokens.get(i + 1);
+                                    arg2 = "t" + num;
+                                    o = new Operacio(tipus, arg1, tokens.get(i + 2),"t"+num);
+
+                                    operacions.add(o);
+                                    num++;
+                                }else{
+                                    tipus = tokens.get(i + 1);
+
+                                    arg2 =tokens.get(i + 2);
+                                    num--;
+                                    arg1 = "t" + num;
+                                    num++;
+                                    o = new Operacio(tipus, arg1, arg2,"t"+num);
+                                    num++;
+
+                                    operacions.add(o);
+
+
+                                }
+
+
 
                             }else{
-                                num++;
-                                o = new Operacio("+", arg1, "t"+num);
-                                operacions.add(o);
-                                tipus = tokens.get(i + 1);
-                                arg2 = tokens.get(i + 2);
-                                o = new Operacio(tipus, arg2, " ");
 
-                                operacions.add(o);
+                                if(tokens.get(i+1).equals("-")) {
+
+                                    tipus = tokens.get(i + 1);
+                                    arg2 = tokens.get(i + 2);
+
+                                    o = new Operacio(tipus, arg2, " ","t"+num);
+
+                                    operacions.add(o);
+
+                                    if(primer==0){
+                                        num--;
+                                        arg1 = "t" +num;
+                                        num++;
+                                        arg2 = "t" +num;
+                                        num++;
+                                        o = new Operacio("+", arg1, arg2,"t"+num);
+                                        operacions.add(o);
+                                        num++;
+
+                                    }else{
 
 
-                                num++;
-                                i++;
+                                        o = new Operacio("+", arg1, "t" + num,"t"+num);
+                                        operacions.add(o);
+                                        num++;
+
+                                    }
 
 
-                                resta=1;
 
 
-                            }
+
+
+
+
+
+
+                                    resta = 1;
+                                }
+
+
                         }
 
 
