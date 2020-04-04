@@ -1,4 +1,5 @@
 
+import Adresscode.GeneratorTAC;
 import Adresscode.Separacio;
 import Parser.Parser;
 import Scanner.Scanner;
@@ -11,13 +12,15 @@ public class Main {
 
     public static void main(String[] args) {
         //System.out.println(args[0]);
-        Scanner scanner = new Scanner("src/tests/" + args[0]);
+        Scanner scanner = new Scanner("src/tests/test4" /*+ args[0]*/);
         Parser parser = new Parser(symbolTable, scanner);
 
+        GeneratorTAC generatorTAC = new GeneratorTAC();
+
         parser.syntaxAnalysis();
-        scanner = new Scanner("src/tests/" + args[0]);
+        scanner = new Scanner("src/tests/test4" /*+ args[0]*/);
         Separacio separacio=new Separacio(scanner);
         separacio.separar();
-        int a=0;
+        generatorTAC.generator(separacio);
     }
 }

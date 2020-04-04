@@ -8,7 +8,8 @@ import Scanner.Scanner;
 public class Separacio {
 
     private Scanner scanner;
-    private LinkedList<Operacio> operacions;
+    public LinkedList<Operacio> operacions;
+
     public Separacio(Scanner s) {
 
         this.scanner = s;
