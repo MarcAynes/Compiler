@@ -6,12 +6,12 @@ import java.nio.file.Paths;
 
 public class Optimizer {
 
-    public void optimization()
+    public void optimization(File file)
     {
         File newFile = new File("src/OptimizedCode/OptimizedTAC");
         StringBuilder text = new StringBuilder();
 
-        try(BufferedReader input = Files.newBufferedReader(Paths.get("src/GeneratedTAC/TAC"))){
+        try(BufferedReader input = Files.newBufferedReader(Paths.get(String.valueOf(file)))){
             String line;
             while ((line = input.readLine()) != null) {
                 text.append(line).append("\n");

@@ -8,7 +8,7 @@ import java.util.LinkedList;
 
 public class GeneratorTAC {
 
-    public void generator(Separacio separation) {
+    public File generator(Separacio separation) {
         LinkedList<Operacio> operations = separation.operacions;
         StringBuilder stringToWrite = new StringBuilder();
 
@@ -49,5 +49,6 @@ public class GeneratorTAC {
                 }
             }
         }
+        return file;
     }
 }

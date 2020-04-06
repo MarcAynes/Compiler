@@ -23,7 +23,6 @@ public class Main {
         scanner = new Scanner("src/tests/" + args[0]);
         Separacio separacio=new Separacio(scanner);
         separacio.separar();
-        generatorTAC.generator(separacio);
-        optimizer.optimization();
+        optimizer.optimization(generatorTAC.generator(separacio));
     }
 }
