@@ -1,7 +1,5 @@
 package Semantic;
 
-
-
 import ErrorHandler.SemanticalError;
 import TaulaDeSimbols.Symbol;
 import TaulaDeSimbols.SymbolTable;
