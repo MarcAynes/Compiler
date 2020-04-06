@@ -6,7 +6,7 @@ import java.nio.file.Paths;
 
 public class Optimizer {
 
-    public void optimization(File file)
+    public File optimization(File file)
     {
         File newFile = new File("src/OptimizedCode/OptimizedTAC");
         StringBuilder text = new StringBuilder();
@@ -34,5 +34,6 @@ public class Optimizer {
                 ex.printStackTrace();
             }
         }
+        return newFile;
     }
 }
