@@ -1,6 +1,7 @@
 
 import Adresscode.GeneratorTAC;
 import Adresscode.Separacio;
+import Optimization.Optimizer;
 import Parser.Parser;
 import Scanner.Scanner;
 import TaulaDeSimbols.SymbolTable;
@@ -16,11 +17,13 @@ public class Main {
         Parser parser = new Parser(symbolTable, scanner);
 
         GeneratorTAC generatorTAC = new GeneratorTAC();
+        Optimizer optimizer = new Optimizer();
 
         parser.syntaxAnalysis();
         scanner = new Scanner("src/tests/" + args[0]);
         Separacio separacio=new Separacio(scanner);
         separacio.separar();
         generatorTAC.generator(separacio);
+        optimizer.optimization();
     }
 }

@@ -4,8 +4,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.LinkedList;
 
 public class GeneratorTAC {
@@ -52,5 +50,4 @@ public class GeneratorTAC {
             }
         }
     }
-
 }
