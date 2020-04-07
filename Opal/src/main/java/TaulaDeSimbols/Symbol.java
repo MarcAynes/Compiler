@@ -14,6 +14,10 @@ public class Symbol {
     5 - funcio
     6 - numero
 
+    7 - selecció (IF/ELSE)
+    8 - operador relacional
+    9 - parèntesis
+
      */
 
     public Symbol(String reserved_Word, int Type){
