@@ -23,10 +23,11 @@ public class Parser {
         this.syntacticalError = new SyntacticalError();
     }
 
-    public void syntaxAnalysis(){
+    public boolean syntaxAnalysis(){
         int nivell = 0;
         char op = ' ';
         String newVar = "";
+        boolean ok = true;
         //llança l'Scanner i obté una llista de Tokens
         List<String> tokens = scanner.getTokens();
 
@@ -160,6 +161,7 @@ public class Parser {
 
                 if(nivell < 0){
                     syntacticalError.mostrarErrors();
+                    ok = false;
                     break;
                 }
             }
@@ -167,8 +169,10 @@ public class Parser {
             if(nivell > 0){ //detecta errors a l'ultima linia
                 syntacticalError.addSyntacticError("S'esperava ;");
                 syntacticalError.mostrarErrors();
+                ok = false;
             }
         }
-        semantic.Errors(); //mostrar errors semantic
+        ok = ok & semantic.Errors(); //mostrar errors semantic
+        return ok;
     }
 }
