@@ -21,7 +21,7 @@ public class Semantic {
 
                 for(int i = posicio_inici+1; !tokens.get(i).equals(";"); i++){
                     s = symbols.search(tokens.get(i));
-                    System.out.println(tokens.get(i));
+                    //System.out.println(tokens.get(i));
                     if (s != null && s.Type == 0 && !(typeTable.get(s.Reserved_Word).varType.equals("int") || typeTable.get(s.Reserved_Word).varType.equals("char"))){
 
                         sm.addSemanticalError("Integer can not be assigned to " + typeTable.get(s.Reserved_Word).varType);
@@ -41,7 +41,7 @@ public class Semantic {
                     for(int i = posicio_inici+1; !tokens.get(i).equals(";"); i++){
 
                         s = symbols.search(tokens.get(i));
-                        System.out.println(tokens.get(i));
+                        //System.out.println(tokens.get(i));
                         if (s != null && s.Type == 0 && !(typeTable.get(s.Reserved_Word).varType.equals("char") || typeTable.get(s.Reserved_Word).varType.equals("int"))){
 
                             //throw new TypeException("char can not be assigned to " + typeTable.get(s.Reserved_Word).varType);
@@ -62,7 +62,7 @@ public class Semantic {
                         for(int i = posicio_inici+1; !tokens.get(i).equals(";"); i++){
 
                             s = symbols.search(tokens.get(i));
-                            System.out.println(tokens.get(i));
+                            //System.out.println(tokens.get(i));
                             if (s != null && s.Type == 0 && !(typeTable.get(s.Reserved_Word).varType.equals("char") || typeTable.get(s.Reserved_Word).varType.equals("int") || typeTable.get(s.Reserved_Word).varType.equals("float"))){
 
                                 //throw new TypeException("char can not be assigned to " + typeTable.get(s.Reserved_Word).varType);
@@ -86,7 +86,7 @@ public class Semantic {
                 if (s.Reserved_Word.equals("int")) {
 
                     s = symbols.search(tokens.get(posicio_inici+1));
-                    System.out.println(tokens.get(posicio_inici+1));
+                    //System.out.println(tokens.get(posicio_inici+1));
                     if (s.Type == 0){
 
                         typeTable.put(s.Reserved_Word, new Tipus(s.Reserved_Word, "int"));
@@ -96,7 +96,7 @@ public class Semantic {
                     if (s.Reserved_Word.equals("char")){
 
                         s = symbols.search(tokens.get(posicio_inici+1));
-                        System.out.println(tokens.get(posicio_inici+1));
+                        //System.out.println(tokens.get(posicio_inici+1));
                         if (s.Type == 0){
 
                             typeTable.put(s.Reserved_Word, new Tipus(s.Reserved_Word, "char"));
@@ -105,7 +105,7 @@ public class Semantic {
                     }else{
                         if (s.Reserved_Word.equals("float")){
                             s = symbols.search(tokens.get(posicio_inici+1));
-                            System.out.println(tokens.get(posicio_inici+1));
+                            //System.out.println(tokens.get(posicio_inici+1));
                             if (s.Type == 0){
 
                                 typeTable.put(s.Reserved_Word, new Tipus(s.Reserved_Word, "float"));
@@ -118,7 +118,7 @@ public class Semantic {
     }
 
 
-    public void Errors(){
-        sm.mostrarErrors();
+    public boolean Errors(){
+        return sm.mostrarErrors();
     }
 }

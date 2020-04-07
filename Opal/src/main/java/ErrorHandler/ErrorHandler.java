@@ -17,14 +17,16 @@ public class ErrorHandler {
         this.error = error;
     }
 
-    public void mostrarErrors(){
+    public boolean mostrarErrors(){
          if(this.error.size() > 0) {
              for (String anError : this.error) {
                  System.out.println(anError);
              }
          }
-         else
-            System.out.println("Procés finalitzat amb èxit.");
+         else{
+             return true;
+         }
+         return false;
     }
 
     public void addError(String s){
