@@ -7,19 +7,20 @@ import Semantic.Semantic;
 import TaulaDeSimbols.Symbol;
 import TaulaDeSimbols.SymbolTable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Parser {
     private Scanner scanner;
-    private SymbolTable taulaS;
+    private List<SymbolTable> taulaS = new ArrayList<>();
     private SyntacticalError syntacticalError;
-    Semantic semantic = new Semantic();
+    private Semantic semantic = new Semantic();
 
     public Parser(SymbolTable taulaS, Scanner scanner){
         this.scanner = scanner;
-        this.taulaS = taulaS;
+        this.taulaS.add(taulaS);
         this.syntacticalError = new SyntacticalError();
     }
 
@@ -28,7 +29,7 @@ public class Parser {
         char op = ' ';
         String newVar = "";
         boolean lastOne = false;
-        int countOpened = 0;
+        int deepCount = 0;
 
         boolean ok = true;
         //llança l'Scanner i obté una llista de Tokens
@@ -39,7 +40,7 @@ public class Parser {
             for (int i = 0; tokens.size() > i; i++) {
                 switch (nivell){
                     case 0:
-                        Symbol s = taulaS.search(tokens.get(i));
+                        Symbol s = searchInTables(tokens.get(i), taulaS);
                         if(s != null && s.Type == 4){ //miro que estigui a la taula de simbols i sigui una declaracio
                             //afegir D i tV a l'arbre
                             nivell = 1;
@@ -54,7 +55,8 @@ public class Parser {
                         }
 
                         else if (s != null && s.Reserved_Word.equals("}")){
-                            countOpened--;
+                            taulaS.remove(deepCount);
+                            deepCount--;
                             break;
                         }
 
@@ -63,9 +65,9 @@ public class Parser {
                             op = 'A';
                         }
                     case 1: //espero una variable
-                        if(op == 'A' && taulaS.search(tokens.get(i)) != null || op == 'D'){ //miro que estigui a la taula de simbols
+                        if(op == 'A' && searchInTables(tokens.get(i), taulaS) != null || op == 'D'){ //miro que estigui a la taula de simbols
                             if(op == 'D'){
-                                Symbol sym = taulaS.search(tokens.get(i));
+                                Symbol sym = searchInTables(tokens.get(i), taulaS);
                                 if (sym != null && sym.Type != 0){
                                     nivell = -1;
                                     syntacticalError.addSyntacticError("No es pot declarar una variable amb el nom " + tokens.get(i));
@@ -94,15 +96,16 @@ public class Parser {
                         break;
                     case 2:
                         if(op == 'D' && tokens.get(i).equals(";")){
-                            System.out.println("OK");
-                            nivell = 0;
-                            op = ' ';
+
                             //afegim la variable a la taula de símbols
-                            if(!taulaS.add(new Symbol(newVar, 0))){
+                            if(!taulaS.get(deepCount).add(new Symbol(newVar, 0))){
                                 nivell = -1;
                                 syntacticalError.addSyntacticError("Ja existeix la variable '"+ newVar + "' a la taula de símbols");
                             }else{
-                                //semantic.semanticAnalysis(taulaS, tokens, inici);
+                                System.out.println("OK");
+                                nivell = 0;
+                                op = ' ';
+                                //semantic.semanticAnalysis(taulaS), tokens, inici);
                                 inici = i+1;
                             }
 
@@ -127,7 +130,7 @@ public class Parser {
                         nivell = 4;
                         char[] limits = {0, 0};
                         //només arribo aquí si és ASSIGNACIÓ/SELECCIÓ
-                        Symbol sym = taulaS.search(tokens.get(i));
+                        Symbol sym = searchInTables(tokens.get(i), taulaS);
                         if(sym != null && sym.Type != 0){
                             nivell = -1;
                             syntacticalError.addSyntacticError("Paraula "+tokens.get(i)+" reservada");
@@ -144,7 +147,7 @@ public class Parser {
                             limits[1] = '9';
                         }
                         else if(Character.isLetter(tokens.get(i).charAt(0))){ //rebo una variable
-                            if(taulaS.search(tokens.get(i)) == null){
+                            if(searchInTables(tokens.get(i), taulaS) == null){
                                 nivell = -1;
                                 syntacticalError.addSyntacticError("Variable '" + tokens.get(i) + "' no declarada.");
                                 break;
@@ -184,7 +187,7 @@ public class Parser {
 
                     case 4:
                         nivell = -1;
-                        sym = taulaS.search(tokens.get(i));
+                        sym = searchInTables(tokens.get(i), taulaS);
                         if(op == 'A' && tokens.get(i).equals(";")){
                             System.out.println("OK");
                             nivell = 0;
@@ -218,7 +221,8 @@ public class Parser {
                             System.out.println("OK");
                             nivell = 0;
                             op = ' ';
-                            countOpened++;
+                            deepCount++;
+                            taulaS.add(new SymbolTable());
                         }
                         else{
                             syntacticalError.addSyntacticError("S'esperava {");
@@ -237,7 +241,7 @@ public class Parser {
                 syntacticalError.mostrarErrors();
                 ok = false;
             }
-            else if (nivell == 0 && countOpened > 0){
+            else if (nivell == 0 && deepCount > 0){
                 ok = false;
                 syntacticalError.addSyntacticError("S'esperava }");
                 syntacticalError.mostrarErrors();
@@ -245,5 +249,15 @@ public class Parser {
         }
         ok = ok & semantic.Errors(); //mostrar errors semantic
         return ok;
+    }
+
+    public Symbol searchInTables(String token, List<SymbolTable> taulaS){
+        for (int i = taulaS.size() - 1; i >= 0; i--){
+            Symbol sym = taulaS.get(i).search(token);
+            if(sym != null){
+                return sym;
+            }
+        }
+        return null;
     }
 }
