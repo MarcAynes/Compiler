@@ -200,6 +200,22 @@ public class Separacio {
                                 aux="t"+num;
                                 num++;
                                 primer=1;
+                                if(tokens.get(i-1).equals("(")){
+
+                                    aux=tokens.get(i);
+
+                                }
+
+                                if(tokens.get(i+3).equals(")")){
+
+                                    num--;
+                                    o = new Operacio(auxComp, aux, tokens.get(i+2),""+ifnivell,"if");
+                                    operacions.add(o);
+                                    i++;
+                                    num++;
+                                    i=i+3;
+
+                                }
 
                                 break;
 
