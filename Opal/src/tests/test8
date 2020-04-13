@@ -5,6 +5,7 @@ if (a + 1 <= 10 - a){
 }
 int b;
 b = 2;
+int c;
 if (a + b <= 10 ){
     b = a;
     int c;

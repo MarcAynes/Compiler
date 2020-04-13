@@ -69,7 +69,7 @@ public class Separacio {
 
                                 ifnivell++;
                                 //o=new Operacio("if","","", ""+ ifnivell,"");
-                               //operacions.add(o);
+                                //operacions.add(o);
 
 
 
@@ -120,92 +120,92 @@ public class Separacio {
 
                     }else{
 
-                            arg1=tokens.get(i);
+                        arg1=tokens.get(i);
 
-                            switch (tokens.get(i+1)){
+                        switch (tokens.get(i+1)){
 
-                                case "+":
+                            case "+":
 
-                                    if(primer==1){
-                                        primer=0;
+                                if(primer==1){
+                                    primer=0;
 
-                                        tipus = tokens.get(i + 1);
-                                        arg2 = "t" + num;
-                                        o = new Operacio(tipus, arg1, tokens.get(i + 2),"t"+num,"");
-
-                                        operacions.add(o);
-                                        num++;
-                                    }else{
-                                        tipus = tokens.get(i + 1);
-
-                                        arg2 =tokens.get(i + 2);
-                                        num--;
-                                        arg1 = "t" + num;
-                                        num++;
-                                        o = new Operacio(tipus, arg1, arg2,"t"+num,"");
-                                        num++;
-
-                                        operacions.add(o);
-
-
-                                    }
-
-                                    break;
-                                case "-":
                                     tipus = tokens.get(i + 1);
-                                    arg2 = tokens.get(i + 2);
-
-                                    o = new Operacio(tipus, arg2, " ","t"+num,"");
+                                    arg2 = "t" + num;
+                                    o = new Operacio(tipus, arg1, tokens.get(i + 2),"t"+num,"");
 
                                     operacions.add(o);
                                     num++;
+                                }else{
+                                    tipus = tokens.get(i + 1);
 
-                                    if(primer==0){
-                                        num--;
-                                        arg1 = "t" +num;
-                                        num++;
-                                        arg2 = "t" +num;
-                                        num++;
-                                        o = new Operacio("+", arg1, arg2,"t"+num,"");
-                                        operacions.add(o);
-                                        num++;
-
-                                    }else{
-
-                                        j=num-1;
-                                        o = new Operacio("+", arg1, "t" + j,"t"+num,"");
-                                        operacions.add(o);
-                                        num++;
-
-                                    }
-
-                                    resta = 1;
-
-
-                                    break;
-                                case ")":
-
+                                    arg2 =tokens.get(i + 2);
                                     num--;
-                                    o = new Operacio(auxComp, aux, "t" + num,""+ifnivell,"if");
+                                    arg1 = "t" + num;
+                                    num++;
+                                    o = new Operacio(tipus, arg1, arg2,"t"+num,"");
+                                    num++;
+
                                     operacions.add(o);
-                                    i++;
-                                    num++;
-                                    break;
 
 
-                                case "<":case "==":case "<=":case ">=":
+                                }
 
-                                    auxComp=tokens.get(i+1);
+                                break;
+                            case "-":
+                                tipus = tokens.get(i + 1);
+                                arg2 = tokens.get(i + 2);
+
+                                o = new Operacio(tipus, arg2, " ","t"+num,"");
+
+                                operacions.add(o);
+                                num++;
+
+                                if(primer==0){
                                     num--;
-                                    aux="t"+num;
+                                    arg1 = "t" +num;
                                     num++;
-                                    primer=1;
+                                    arg2 = "t" +num;
+                                    num++;
+                                    o = new Operacio("+", arg1, arg2,"t"+num,"");
+                                    operacions.add(o);
+                                    num++;
 
-                                    break;
+                                }else{
+
+                                    j=num-1;
+                                    o = new Operacio("+", arg1, "t" + j,"t"+num,"");
+                                    operacions.add(o);
+                                    num++;
+
+                                }
+
+                                resta = 1;
+
+
+                                break;
+                            case ")":
+
+                                num--;
+                                o = new Operacio(auxComp, aux, "t" + num,""+ifnivell,"if");
+                                operacions.add(o);
+                                i++;
+                                num++;
+                                break;
+
+
+                            case "<":case "==":case "<=":case ">=":
+
+                                auxComp=tokens.get(i+1);
+                                num--;
+                                aux="t"+num;
+                                num++;
+                                primer=1;
+
+                                break;
 
 
 
-                            }
+                        }
 
 
 
