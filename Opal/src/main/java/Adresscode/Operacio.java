@@ -6,12 +6,23 @@ public class Operacio {
     private String arg1;
     private String arg2;
     private String result;
+    private String tipus;
+    public String getTipus() {
+        return tipus;
+    }
 
-    public Operacio(String op, String arg1, String arg2,String result) {
+    public void setTipus(String tipus) {
+        this.tipus = tipus;
+    }
+
+
+
+    public Operacio(String op, String arg1, String arg2,String result,String tipus) {
         this.op = op;
         this.arg1 = arg1;
         this.arg2 = arg2;
         this.result = result;
+        this.tipus = tipus;
     }
 
 
