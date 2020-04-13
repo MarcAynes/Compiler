@@ -12,6 +12,11 @@ public class Symbol {
     3 - operacio
     4 - declaracio/tipus
     5 - funcio
+    6 - numero
+
+    7 - selecció (IF/ELSE)
+    8 - operador relacional
+    9 - parèntesis
 
      */
 

@@ -32,8 +32,47 @@
     "Type": 5
   },
   {
-    "Reserved_Word": "-",
-    "Type": 3
+    "Reserved_Word": "if",
+    "Type": 7
+  },
+  {
+    "Reserved_Word": ">",
+    "Type": 8
+  },
+  {
+    "Reserved_Word": ">=",
+    "Type": 8
+  },
+  {
+    "Reserved_Word": "<=",
+    "Type": 8
+  },
+  {
+    "Reserved_Word": "<",
+    "Type": 8
+  },
+  {
+    "Reserved_Word": "!=",
+    "Type": 8
+  },
+  {
+    "Reserved_Word": "==",
+    "Type": 8
+  },
+  {
+    "Reserved_Word": "(",
+    "Type": 9
+  },
+  {
+    "Reserved_Word": ")",
+    "Type": 9
+  },
+  {
+    "Reserved_Word": "{",
+    "Type": 10
+  },
+  {
+    "Reserved_Word": "}",
+    "Type": 10
   }
-
 ]

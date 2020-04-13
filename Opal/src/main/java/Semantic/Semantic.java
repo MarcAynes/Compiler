@@ -11,24 +11,25 @@ public class Semantic {
     HashMap<String, Tipus> typeTable = new HashMap<String, Tipus>();
     SemanticalError sm = new SemanticalError();
 
-    public void semanticAnalysis(SymbolTable symbols, List<String> tokens){
+    public void semanticAnalysis(SymbolTable symbols, List<String> tokens, int posicio_inici){
 
-        Symbol s = symbols.search(tokens.get(0));
+        Symbol s = symbols.search(tokens.get(posicio_inici));
         if (s.Type == 0){       // var
 
             Tipus t = typeTable.get(s.Reserved_Word);
             if (t.varType.equals("int")){
 
-                for(int i = 1; !tokens.get(i).equals(";"); i++){
+                for(int i = posicio_inici+1; !tokens.get(i).equals(";"); i++){
                     s = symbols.search(tokens.get(i));
-                    if (s.Type == 0 && (typeTable.get(s.Reserved_Word).varType.equals("int") || typeTable.get(s.Reserved_Word).varType.equals("char"))){
+                    //System.out.println(tokens.get(i));
+                    if (s != null && s.Type == 0 && !(typeTable.get(s.Reserved_Word).varType.equals("int") || typeTable.get(s.Reserved_Word).varType.equals("char"))){
 
-
+                        sm.addSemanticalError("Integer can not be assigned to " + typeTable.get(s.Reserved_Word).varType);
                     }else{
-                        if (s.Type == 0){
+                        if (tokens.get(i).contains(".")){
 
                             //throw new TypeException("Integer can not be assigned to " + typeTable.get(s.Reserved_Word).varType);
-                            sm.addSemanticalError("Integer can not be assigned to " + typeTable.get(s.Reserved_Word).varType);
+                            sm.addSemanticalError("Integer can not be assigned to float");
                             break;
                         }
                     }
@@ -37,17 +38,46 @@ public class Semantic {
             }else{
                 if(t.varType.equals("char")){
 
-                    for(int i = 1; !tokens.get(i).equals(";"); i++){
+                    for(int i = posicio_inici+1; !tokens.get(i).equals(";"); i++){
 
                         s = symbols.search(tokens.get(i));
-                        if (s.Type == 0 && !typeTable.get(s.Reserved_Word).varType.equals("char")){
+                        //System.out.println(tokens.get(i));
+                        if (s != null && s.Type == 0 && !(typeTable.get(s.Reserved_Word).varType.equals("char") || typeTable.get(s.Reserved_Word).varType.equals("int"))){
 
                             //throw new TypeException("char can not be assigned to " + typeTable.get(s.Reserved_Word).varType);
                             sm.addSemanticalError("char can not be assigned to " + typeTable.get(s.Reserved_Word).varType);
                             break;
+                        }else{
+                            if (tokens.get(i).contains(".")){
+
+                                //throw new TypeException("char can not be assigned to " + typeTable.get(s.Reserved_Word).varType);
+                                sm.addSemanticalError("char can not be assigned to float");
+                                break;
+                            }
                         }
                     }
 
+                }else{
+                    if (t.varType.equals("float")){
+                        for(int i = posicio_inici+1; !tokens.get(i).equals(";"); i++){
+
+                            s = symbols.search(tokens.get(i));
+                            //System.out.println(tokens.get(i));
+                            if (s != null && s.Type == 0 && !(typeTable.get(s.Reserved_Word).varType.equals("char") || typeTable.get(s.Reserved_Word).varType.equals("int") || typeTable.get(s.Reserved_Word).varType.equals("float"))){
+
+                                //throw new TypeException("char can not be assigned to " + typeTable.get(s.Reserved_Word).varType);
+                                sm.addSemanticalError("float can not be assigned to " + typeTable.get(s.Reserved_Word).varType);
+                                break;
+                            }else{
+                                if (tokens.get(i).contains("'")){
+
+                                    //throw new TypeException("char can not be assigned to " + typeTable.get(s.Reserved_Word).varType);
+                                    sm.addSemanticalError("float can not be assigned to char");
+                                    break;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }else{
@@ -55,8 +85,8 @@ public class Semantic {
             if (s.Type == 4){           //declaration
                 if (s.Reserved_Word.equals("int")) {
 
-                    s = symbols.search(tokens.get(1));
-
+                    s = symbols.search(tokens.get(posicio_inici+1));
+                    //System.out.println(tokens.get(posicio_inici+1));
                     if (s.Type == 0){
 
                         typeTable.put(s.Reserved_Word, new Tipus(s.Reserved_Word, "int"));
@@ -65,13 +95,22 @@ public class Semantic {
                 }else{
                     if (s.Reserved_Word.equals("char")){
 
-                        s = symbols.search(tokens.get(1));
-
+                        s = symbols.search(tokens.get(posicio_inici+1));
+                        //System.out.println(tokens.get(posicio_inici+1));
                         if (s.Type == 0){
 
                             typeTable.put(s.Reserved_Word, new Tipus(s.Reserved_Word, "char"));
                         }
 
+                    }else{
+                        if (s.Reserved_Word.equals("float")){
+                            s = symbols.search(tokens.get(posicio_inici+1));
+                            //System.out.println(tokens.get(posicio_inici+1));
+                            if (s.Type == 0){
+
+                                typeTable.put(s.Reserved_Word, new Tipus(s.Reserved_Word, "float"));
+                            }
+                        }
                     }
                 }
             }
@@ -79,7 +118,7 @@ public class Semantic {
     }
 
 
-    public void Errors(){
-        sm.mostrarErrors();
+    public boolean Errors(){
+        return sm.mostrarErrors();
     }
 }

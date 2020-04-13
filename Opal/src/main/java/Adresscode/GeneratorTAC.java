@@ -4,13 +4,11 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.LinkedList;
 
 public class GeneratorTAC {
 
-    public void generator(Separacio separation) {
+    public File generator(Separacio separation) {
         LinkedList<Operacio> operations = separation.operacions;
         StringBuilder stringToWrite = new StringBuilder();
 
@@ -51,6 +49,6 @@ public class GeneratorTAC {
                 }
             }
         }
+        return file;
     }
-
 }

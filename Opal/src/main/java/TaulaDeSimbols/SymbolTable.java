@@ -38,6 +38,10 @@ public class SymbolTable {
 
     }
 
+    public SymbolTable(){ //taula de simbols buida
+
+    }
+
     public Symbol search(String s){
 
         return this.Table.get(s);
