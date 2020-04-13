@@ -25,10 +25,6 @@ public class Main {
         scanner = new Scanner("src/tests/" + args[0]);
         Separacio separacio= new Separacio(scanner);
         separacio.separar();
-        for (int i = 0; i<separacio.operacions.size(); i++)
-        {
-            System.out.println(separacio.operacions.get(i).getArg1() + " " + separacio.operacions.get(i).getOp() + " OO" + separacio.operacions.get(i).getArg2());
-        }
         optimizer.optimization(generatorTAC.generator(separacio));
     }
 }

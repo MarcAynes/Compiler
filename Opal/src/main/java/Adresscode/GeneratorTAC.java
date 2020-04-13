@@ -4,7 +4,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class GeneratorTAC {
 
@@ -12,9 +14,11 @@ public class GeneratorTAC {
         LinkedList<Operacio> operations = separation.operacions;
         StringBuilder stringToWrite = new StringBuilder();
 
+        List<Integer> finalIf = new ArrayList<Integer>();
         File file = new File("src/GeneratedTAC/TAC");
         int temporal = 1;
-        int temporalFin = 1;
+        int temporalFin = 0;
+        int temporalFinIf = 1;
 
         for (int i = 0; i < operations.size(); i++) {
 
@@ -28,8 +32,10 @@ public class GeneratorTAC {
                     }else if (operations.get(i).getOp().equals("=")) {
                         stringToWrite.append(operations.get(i).getArg1()).append(" ").append(operations.get(i).getOp()).append(" ").append(operations.get(i).getArg2()).append(";\n");
                     } else {
+                        temporalFin++;
                         stringToWrite.append("t").append(temporal).append(" ").append("=").append(" ").append(operations.get(i).getArg1()).append(" ").append(operations.get(i).getOp()).append(" ").append(operations.get(i).getArg2()).append(";\n");
                         stringToWrite.append("if(t" + temporal + ") goto Fiif" + temporalFin + "\n");
+                        finalIf.add(temporalFin);
                         temporal++;
                     }
                 }
@@ -39,8 +45,8 @@ public class GeneratorTAC {
                     temporal++;
                 }else if(operations.get(i).getOp().equals("Fiif"))
                 {
-                    stringToWrite.append(operations.get(i).getOp() + temporalFin+"\n");
-                    temporalFin++;
+                    stringToWrite.append(operations.get(i).getOp() + temporalFinIf +"\n");
+                    temporalFinIf++;
                 }else if (operations.get(i).getOp().equals("=")) {
                     stringToWrite.append(operations.get(i).getArg1()).append(" ").append(operations.get(i).getOp()).append(" ").append(operations.get(i).getArg2()).append(";\n");
                 } else {
