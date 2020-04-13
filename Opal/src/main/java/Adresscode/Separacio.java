@@ -83,9 +83,9 @@ public class Separacio {
                                 ifnivell--;
                             }
 
-                            tipus="var";
-                            arg1=tokens.get(i);
-                            arg2=tokens.get(i+1);
+                            //tipus="var";
+                            //arg1=tokens.get(i);
+                            //arg2=tokens.get(i+1);
                             //o=new Operacio(tipus,arg1,arg2);
                             //operacions.add(o);
                             i++;
