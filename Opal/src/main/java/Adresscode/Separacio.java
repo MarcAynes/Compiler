@@ -33,6 +33,8 @@ public class Separacio {
         String var=new String();
         int num=1;
         int ifnivell=0;
+        LinkedList<Integer> ifnivell2=new LinkedList<>();
+
         int parent=0;
         Operacio o ;
         String auxComp=new String();
@@ -68,6 +70,9 @@ public class Separacio {
                             if(tokens.get(i).equals("if")){
 
                                 ifnivell++;
+
+                                ifnivell2.addFirst(ifnivell);
+
                                 //o=new Operacio("if","","", ""+ ifnivell,"");
                                 //operacions.add(o);
 
@@ -78,9 +83,11 @@ public class Separacio {
                             if(tokens.get(i).equals("}")){
 
 
-                                o=new Operacio("Fiif","","", ""+ ifnivell,"");
+                                o=new Operacio("Fiif","","", ""+ ifnivell2.get(0),"");
                                 operacions.add(o);
-                                ifnivell--;
+                                ifnivell2.removeFirst();
+                                i--;
+                                lastToken = 1;
                             }
 
                             //tipus="var";
