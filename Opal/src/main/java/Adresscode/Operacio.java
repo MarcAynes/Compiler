@@ -49,4 +49,8 @@ public class Operacio {
     public void setArg2(String arg2) {
         this.arg2 = arg2;
     }
+
+    public String getResult() {
+        return result;
+    }
 }

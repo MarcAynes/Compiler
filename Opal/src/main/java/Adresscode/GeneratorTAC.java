@@ -4,53 +4,40 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 public class GeneratorTAC {
 
     public File generator(Separacio separation) {
+
         LinkedList<Operacio> operations = separation.operacions;
         StringBuilder stringToWrite = new StringBuilder();
-
-        List<Integer> finalIf = new ArrayList<Integer>();
         File file = new File("src/GeneratedTAC/TAC");
         int temporal = 1;
-        int temporalFin = 0;
-        int temporalFinIf = 1;
 
-        for (int i = 0; i < operations.size(); i++) {
-
-            if(operations.get(i).getTipus().equals("if"))
-            {
-                if(operations.get(i).getOp().equals("==") || operations.get(i).getOp().equals("<=") || operations.get(i).getOp().equals("<") || operations.get(i).getOp().equals(">") || operations.get(i).getOp().equals(">="))
-                {
-                    if (operations.get(i).getOp().equals("-")) {
-                        stringToWrite.append("t").append(temporal).append(" ").append("=").append(" ").append(operations.get(i).getOp()).append(" ").append(operations.get(i).getArg1()).append(";\n");
+        for (Operacio operation : operations) {
+            if (operation.getTipus().equals("if")) {
+                if (operation.getOp().equals("==") || operation.getOp().equals("<=") || operation.getOp().equals("<") || operation.getOp().equals(">") || operation.getOp().equals(">=")) {
+                    if (operation.getOp().equals("-")) {
+                        stringToWrite.append("t").append(temporal).append(" ").append("=").append(" ").append(operation.getOp()).append(" ").append(operation.getArg1()).append(";\n");
                         temporal++;
-                    }else if (operations.get(i).getOp().equals("=")) {
-                        stringToWrite.append(operations.get(i).getArg1()).append(" ").append(operations.get(i).getOp()).append(" ").append(operations.get(i).getArg2()).append(";\n");
+                    } else if (operation.getOp().equals("=")) {
+                        stringToWrite.append(operation.getArg1()).append(" ").append(operation.getOp()).append(" ").append(operation.getArg2()).append(";\n");
                     } else {
-                        temporalFin++;
-                        stringToWrite.append("t").append(temporal).append(" ").append("=").append(" ").append(operations.get(i).getArg1()).append(" ").append(operations.get(i).getOp()).append(" ").append(operations.get(i).getArg2()).append(";\n");
-                        stringToWrite.append("if(t" + temporal + ") goto Fiif" + temporalFin + "\n");
-                        finalIf.add(temporalFin);
-                        temporal++;
+                        stringToWrite.append("t").append(temporal).append(" ").append("=").append(" ").append(operation.getArg1()).append(" ").append(operation.getOp()).append(" ").append(operation.getArg2()).append(";\n");
+                        stringToWrite.append("if(t").append(temporal).append(") goto Fiif").append(operation.getResult()).append("\n");
                     }
                 }
-            }else {
-                if (operations.get(i).getOp().equals("-")) {
-                    stringToWrite.append("t").append(temporal).append(" ").append("=").append(" ").append(operations.get(i).getOp()).append(" ").append(operations.get(i).getArg1()).append(";\n");
+            } else {
+                if (operation.getOp().equals("-")) {
+                    stringToWrite.append("t").append(temporal).append(" ").append("=").append(" ").append(operation.getOp()).append(" ").append(operation.getArg1()).append(";\n");
                     temporal++;
-                }else if(operations.get(i).getOp().equals("Fiif"))
-                {
-                    stringToWrite.append(operations.get(i).getOp() + temporalFinIf +"\n");
-                    temporalFinIf++;
-                }else if (operations.get(i).getOp().equals("=")) {
-                    stringToWrite.append(operations.get(i).getArg1()).append(" ").append(operations.get(i).getOp()).append(" ").append(operations.get(i).getArg2()).append(";\n");
+                } else if (operation.getOp().equals("Fiif")) {
+                    stringToWrite.append(operation.getOp()).append(operation.getResult()).append("\n");
+                } else if (operation.getOp().equals("=")) {
+                    stringToWrite.append(operation.getArg1()).append(" ").append(operation.getOp()).append(" ").append(operation.getArg2()).append(";\n");
                 } else {
-                    stringToWrite.append("t").append(temporal).append(" ").append("=").append(" ").append(operations.get(i).getArg1()).append(" ").append(operations.get(i).getOp()).append(" ").append(operations.get(i).getArg2()).append(";\n");
+                    stringToWrite.append("t").append(temporal).append(" ").append("=").append(" ").append(operation.getArg1()).append(" ").append(operation.getOp()).append(" ").append(operation.getArg2()).append(";\n");
                     temporal++;
                 }
             }
