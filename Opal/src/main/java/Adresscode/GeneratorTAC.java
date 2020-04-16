@@ -25,16 +25,33 @@ public class GeneratorTAC {
                         stringToWrite.append(operation.getArg1()).append(" ").append(operation.getOp()).append(" ").append(operation.getArg2()).append(";\n");
                     } else {
                         stringToWrite.append("t").append(temporal).append(" ").append("=").append(" ").append(operation.getArg1()).append(" ").append(operation.getOp()).append(" ").append(operation.getArg2()).append(";\n");
-                        stringToWrite.append("if(!t").append(temporal).append(") goto Fiif").append(operation.getResult()).append("\n");
+                        stringToWrite.append("if(!t").append(temporal).append(") goto fiif").append(operation.getResult()).append("\n");
                     }
                 }
-            } else {
+            } else if (operation.getTipus().equals("while")) {
+                stringToWrite.append("loop").append(operation.getResult()).append("\n");
+                if (operation.getOp().equals("==") || operation.getOp().equals("<=") || operation.getOp().equals("<") || operation.getOp().equals(">") || operation.getOp().equals(">=")) {
+                    if (operation.getOp().equals("-")) {
+                        stringToWrite.append("t").append(temporal).append(" ").append("=").append(" ").append(operation.getOp()).append(" ").append(operation.getArg1()).append(";\n");
+                        temporal++;
+                    } else if (operation.getOp().equals("=")) {
+                        stringToWrite.append(operation.getArg1()).append(" ").append(operation.getOp()).append(" ").append(operation.getArg2()).append(";\n");
+                    } else {
+                        stringToWrite.append("t").append(temporal).append(" ").append("=").append(" ").append(operation.getArg1()).append(" ").append(operation.getOp()).append(" ").append(operation.getArg2()).append(";\n");
+                        stringToWrite.append("while(!t").append(temporal).append(") goto Fiwhile").append(operation.getResult()).append("\n");
+                    }
+                }
+            }else {
                 if (operation.getOp().equals("-")) {
                     stringToWrite.append("t").append(temporal).append(" ").append("=").append(" ").append(operation.getOp()).append(" ").append(operation.getArg1()).append(";\n");
                     temporal++;
                 } else if (operation.getOp().equals("Fiif")) {
                     stringToWrite.append(operation.getOp()).append(operation.getResult()).append("\n");
-                } else if (operation.getOp().equals("=")) {
+                }
+                else if (operation.getOp().equals("Fiwhile")) {
+                    stringToWrite.append("goto loop").append(operation.getResult()).append("\n");
+                    stringToWrite.append(operation.getOp()).append(operation.getResult()).append("\n");
+                }else if (operation.getOp().equals("=")) {
                     stringToWrite.append(operation.getArg1()).append(" ").append(operation.getOp()).append(" ").append(operation.getArg2()).append(";\n");
                 } else {
                     stringToWrite.append("t").append(temporal).append(" ").append("=").append(" ").append(operation.getArg1()).append(" ").append(operation.getOp()).append(" ").append(operation.getArg2()).append(";\n");
