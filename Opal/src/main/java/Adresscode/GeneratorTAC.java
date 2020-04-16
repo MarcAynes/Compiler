@@ -8,11 +8,11 @@ import java.util.LinkedList;
 
 public class GeneratorTAC {
 
-    public File generator(Separacio separation) {
+    public File generator(Separacio separation, int i) {
 
         LinkedList<Operacio> operations = separation.operacions;
         StringBuilder stringToWrite = new StringBuilder();
-        File file = new File("src/GeneratedTAC/TAC");
+        File file = new File("src/GeneratedTAC/TAC"+i);
         int temporal = 1;
 
         for (Operacio operation : operations) {
@@ -25,7 +25,7 @@ public class GeneratorTAC {
                         stringToWrite.append(operation.getArg1()).append(" ").append(operation.getOp()).append(" ").append(operation.getArg2()).append(";\n");
                     } else {
                         stringToWrite.append("t").append(temporal).append(" ").append("=").append(" ").append(operation.getArg1()).append(" ").append(operation.getOp()).append(" ").append(operation.getArg2()).append(";\n");
-                        stringToWrite.append("if(t").append(temporal).append(") goto Fiif").append(operation.getResult()).append("\n");
+                        stringToWrite.append("if(!t").append(temporal).append(") goto Fiif").append(operation.getResult()).append("\n");
                     }
                 }
             } else {

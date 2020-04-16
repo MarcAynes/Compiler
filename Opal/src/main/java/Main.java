@@ -11,20 +11,25 @@ public class Main {
     static SymbolTable symbolTable = new SymbolTable("src/Symbols.json");
 
     public static void main(String[] args) {
-        boolean ok;
-        Scanner scanner = new Scanner("src/tests/" + args[0]);
-        Parser parser = new Parser(symbolTable, scanner);
+        for (int i = 1; i <= 10; i++) {
+            boolean ok;
+            Scanner scanner = new Scanner("src/tests/test" + i /*args[0]*/);
+            System.out.println("****************** test" + i+ " ************************");
+            Parser parser = new Parser(symbolTable, scanner);
 
-        GeneratorTAC generatorTAC = new GeneratorTAC();
-        Optimizer optimizer = new Optimizer();
+            GeneratorTAC generatorTAC = new GeneratorTAC();
+            Optimizer optimizer = new Optimizer();
 
-        ok = parser.syntaxAnalysis();
-        if (!ok){
-            return;
+            ok = parser.syntaxAnalysis();
+            if (!ok) {
+                symbolTable = new SymbolTable("src/Symbols.json");
+                continue;
+            }
+            scanner = new Scanner("src/tests/test" + i /*args[0]*/);
+            Separacio separacio = new Separacio(scanner);
+            separacio.separar();
+            optimizer.optimization(generatorTAC.generator(separacio, i), i);
+            symbolTable = new SymbolTable("src/Symbols.json");
         }
-        scanner = new Scanner("src/tests/" + args[0]);
-        Separacio separacio= new Separacio(scanner);
-        separacio.separar();
-        optimizer.optimization(generatorTAC.generator(separacio));
     }
 }
