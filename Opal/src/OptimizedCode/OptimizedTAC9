@@ -1,5 +1,6 @@
 a = 5;
 t1 = a <= 10;
-if(!t1) goto Fiif1
+if(!t1) goto fiif1
 t1 = a + 1;
+a = t1;
 Fiif1

@@ -1,19 +1,21 @@
 a = 5;
 t1 = a <= 10;
-if(!t1) goto Fiif1
+if(!t1) goto fiif1
 t1 = a + 1;
+a = t1;
 Fiif1
 b = 2;
 t2 = a + 1;
 t3 = t2 <= 10;
-if(!t3) goto Fiif2
+if(!t3) goto fiif2
+b = a;
 t3 = - 'a';
 t4 = c + t3;
 t5 = 'a' + 3;
 t6 = b + a;
 t7 = t6 + 5.6;
 t8 = t5 == t7;
-if(!t8) goto Fiif3
+if(!t8) goto fiif3
 a = c;
 Fiif3
 b = a;

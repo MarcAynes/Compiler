@@ -220,7 +220,7 @@ public class Separacio {
                             case ")":
 
                                 num--;
-                                o = new Operacio(auxComp, aux, "t" + num,""+ifnivell,"if");
+                                o = new Operacio(auxComp, aux, "t" + num,""+ifnivell,tipusFuncio);
                                 operacions.add(o);
                                 i++;
                                 num++;
@@ -247,7 +247,7 @@ public class Separacio {
                                     operacions.add(o);
                                     i++;
                                     num++;
-                                    i=i+3;
+                                    i=i+2;
 
                                 }
 
