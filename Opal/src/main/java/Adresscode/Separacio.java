@@ -31,6 +31,7 @@ public class Separacio {
         String arg2= new String();
         String aux=new String();
         String var=new String();
+        String tipusFuncio=new String();
         int num=1;
         int ifnivell=0;
         LinkedList<Integer> ifnivell2=new LinkedList<>();
@@ -63,7 +64,7 @@ public class Separacio {
                         lastToken=0;
                         primer=1;
 
-                        if (tokens.get(i).equals("float") || tokens.get(i).equals("int") || tokens.get(i).equals("char") || tokens.get(i).equals("if") || tokens.get(i).equals("}")) {
+                        if (tokens.get(i).equals("float") || tokens.get(i).equals("int") || tokens.get(i).equals("char") || tokens.get(i).equals("if") || tokens.get(i).equals("}")|| tokens.get(i).equals("while")) {
 
 
 
@@ -72,18 +73,27 @@ public class Separacio {
                                 ifnivell++;
 
                                 ifnivell2.addFirst(ifnivell);
+                                tipusFuncio="if";
 
                                 //o=new Operacio("if","","", ""+ ifnivell,"");
                                 //operacions.add(o);
 
+                            }
+                            if(tokens.get(i).equals("while")){
 
+                                ifnivell++;
 
+                                ifnivell2.addFirst(ifnivell);
+                                tipusFuncio="while";
+
+                                //o=new Operacio("if","","", ""+ ifnivell,"");
+                                //operacions.add(o);
 
                             }
                             if(tokens.get(i).equals("}")){
 
 
-                                o=new Operacio("Fiif","","", ""+ ifnivell2.get(0),"");
+                                o=new Operacio("fiif","","", ""+ ifnivell2.get(0),"");
                                 operacions.add(o);
                                 ifnivell2.removeFirst();
                                 i--;
@@ -99,7 +109,6 @@ public class Separacio {
 
 
                             //num++;
-
 
                         }else{
 
@@ -216,7 +225,7 @@ public class Separacio {
                                 if(tokens.get(i+3).equals(")")){
 
                                     num--;
-                                    o = new Operacio(auxComp, aux, tokens.get(i+2),""+ifnivell,"if");
+                                    o = new Operacio(auxComp, aux, tokens.get(i+2),""+ifnivell,tipusFuncio);
                                     operacions.add(o);
                                     i++;
                                     num++;

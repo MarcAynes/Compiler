@@ -2,4 +2,4 @@ a = 5;
 t1 = a <= 10;
 if(!t1) goto Fiif1
 t1 = a + 1;
-Fiif1
+t2 =  fiif ;

@@ -2,20 +2,20 @@ a = 5;
 t1 = a <= 10;
 if(!t1) goto Fiif1
 t1 = a + 1;
-Fiif1
+t2 =  fiif ;
 b = 2;
-t2 = a + 1;
-t3 = t2 <= 10;
-if(!t3) goto Fiif2
-t3 = - 'a';
-t4 = c + t3;
-t5 = 'a' + 3;
-t6 = b + a;
-t7 = t6 + 5.6;
-t8 = t5 == t7;
-if(!t8) goto Fiif3
+t3 = a + 1;
+t4 = t2 <= 10;
+if(!t4) goto Fiif2
+t4 = - 'a';
+t5 = c + t3;
+t6 = 'a' + 3;
+t7 = b + a;
+t8 = t6 + 5.6;
+t9 = t5 == t7;
+if(!t9) goto Fiif3
 a = c;
-Fiif3
+t9 =  fiif ;
 b = a;
-Fiif2
+t10 =  fiif ;
 c = 5;
