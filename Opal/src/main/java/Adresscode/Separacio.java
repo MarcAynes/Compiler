@@ -31,6 +31,7 @@ public class Separacio {
         String arg2= new String();
         String aux=new String();
         String var=new String();
+        LinkedList<Integer> whilee =new LinkedList<>();
         String tipusFuncio=new String();
         int num=1;
         int ifnivell=0;
@@ -39,6 +40,7 @@ public class Separacio {
         int parent=0;
         Operacio o ;
         String auxComp=new String();
+        whilee.addFirst(-1);
 
         if (tokens != null) {
 
@@ -72,6 +74,7 @@ public class Separacio {
 
                                 ifnivell++;
 
+
                                 ifnivell2.addFirst(ifnivell);
                                 tipusFuncio="if";
 
@@ -82,7 +85,7 @@ public class Separacio {
                             if(tokens.get(i).equals("while")){
 
                                 ifnivell++;
-
+                                whilee.addFirst(ifnivell);
                                 ifnivell2.addFirst(ifnivell);
                                 tipusFuncio="while";
 
@@ -93,11 +96,26 @@ public class Separacio {
                             if(tokens.get(i).equals("}")){
 
 
-                                o=new Operacio("fiif","","", ""+ ifnivell2.get(0),"");
-                                operacions.add(o);
-                                ifnivell2.removeFirst();
-                                i--;
-                                lastToken = 1;
+                                if(whilee.get(0)==ifnivell2.get(0)){
+
+
+                                    o=new Operacio("Fiif","","", ""+ ifnivell2.get(0),"");
+                                    operacions.add(o);
+                                    ifnivell2.removeFirst();
+                                    whilee.removeFirst();
+                                    i--;
+                                    lastToken = 1;
+
+
+                                }else{
+                                    o=new Operacio("Fiif","","", ""+ ifnivell2.get(0),"");
+                                    operacions.add(o);
+                                    ifnivell2.removeFirst();
+                                    i--;
+                                    lastToken = 1;
+                                }
+
+
                             }
 
                             //tipus="var";
