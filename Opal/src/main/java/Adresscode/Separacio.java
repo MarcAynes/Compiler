@@ -32,20 +32,25 @@ public class Separacio {
         String aux=new String();
         String var=new String();
         int num=1;
+        int ifnivell=0;
+        LinkedList<Integer> ifnivell2=new LinkedList<>();
+
+        int parent=0;
         Operacio o ;
+        String auxComp=new String();
 
         if (tokens != null) {
 
             for (int i=0;i<tokens.size();i++) {
 
-                if (tokens.get(i).equals(";")) {
+                if (tokens.get(i).equals(";") || tokens.get(i).equals("{")) {
 
                     lastToken = 1;
 
                     if(aqui==1){
                         aqui=0;
                         num--;
-                        o=new Operacio("=",var,"t"+num, " ");
+                        o=new Operacio("=",var,"t"+num, " ","");
                         operacions.add(o);
                         num++;
 
@@ -58,11 +63,36 @@ public class Separacio {
                         lastToken=0;
                         primer=1;
 
-                        if (tokens.get(i).equals("float") || tokens.get(i).equals("int") || tokens.get(i).equals("char")) {
+                        if (tokens.get(i).equals("float") || tokens.get(i).equals("int") || tokens.get(i).equals("char") || tokens.get(i).equals("if") || tokens.get(i).equals("}")) {
 
-                            tipus="var";
-                            arg1=tokens.get(i);
-                            arg2=tokens.get(i+1);
+
+
+                            if(tokens.get(i).equals("if")){
+
+                                ifnivell++;
+
+                                ifnivell2.addFirst(ifnivell);
+
+                                //o=new Operacio("if","","", ""+ ifnivell,"");
+                                //operacions.add(o);
+
+
+
+
+                            }
+                            if(tokens.get(i).equals("}")){
+
+
+                                o=new Operacio("Fiif","","", ""+ ifnivell2.get(0),"");
+                                operacions.add(o);
+                                ifnivell2.removeFirst();
+                                i--;
+                                lastToken = 1;
+                            }
+
+                            //tipus="var";
+                            //arg1=tokens.get(i);
+                            //arg2=tokens.get(i+1);
                             //o=new Operacio(tipus,arg1,arg2);
                             //operacions.add(o);
                             i++;
@@ -79,7 +109,7 @@ public class Separacio {
 
                             if(tokens.get(i+3).equals(";")){
                                 arg2=tokens.get(i+2);
-                                o=new Operacio(tipus,arg1,arg2," ");
+                                o=new Operacio(tipus,arg1,arg2," ","");
                                 operacions.add(o);
                                 i++;
                                 i++;
@@ -97,17 +127,18 @@ public class Separacio {
 
                     }else{
 
+                        arg1=tokens.get(i);
 
-                            arg1=tokens.get(i);
+                        switch (tokens.get(i+1)){
 
-                            if(tokens.get(i+1).equals("+")) {
+                            case "+":
 
                                 if(primer==1){
                                     primer=0;
 
                                     tipus = tokens.get(i + 1);
                                     arg2 = "t" + num;
-                                    o = new Operacio(tipus, arg1, tokens.get(i + 2),"t"+num);
+                                    o = new Operacio(tipus, arg1, tokens.get(i + 2),"t"+num,"");
 
                                     operacions.add(o);
                                     num++;
@@ -118,7 +149,7 @@ public class Separacio {
                                     num--;
                                     arg1 = "t" + num;
                                     num++;
-                                    o = new Operacio(tipus, arg1, arg2,"t"+num);
+                                    o = new Operacio(tipus, arg1, arg2,"t"+num,"");
                                     num++;
 
                                     operacions.add(o);
@@ -126,52 +157,82 @@ public class Separacio {
 
                                 }
 
+                                break;
+                            case "-":
+                                tipus = tokens.get(i + 1);
+                                arg2 = tokens.get(i + 2);
 
+                                o = new Operacio(tipus, arg2, " ","t"+num,"");
 
-                            }else{
+                                operacions.add(o);
+                                num++;
 
-                                if(tokens.get(i+1).equals("-")) {
-
-                                    tipus = tokens.get(i + 1);
-                                    arg2 = tokens.get(i + 2);
-
-                                    o = new Operacio(tipus, arg2, " ","t"+num);
-
+                                if(primer==0){
+                                    num--;
+                                    arg1 = "t" +num;
+                                    num++;
+                                    arg2 = "t" +num;
+                                    num++;
+                                    o = new Operacio("+", arg1, arg2,"t"+num,"");
                                     operacions.add(o);
+                                    num++;
 
-                                    if(primer==0){
-                                        num--;
-                                        arg1 = "t" +num;
-                                        num++;
-                                        arg2 = "t" +num;
-                                        num++;
-                                        o = new Operacio("+", arg1, arg2,"t"+num);
-                                        operacions.add(o);
-                                        num++;
+                                }else{
 
-                                    }else{
+                                    j=num-1;
+                                    o = new Operacio("+", arg1, "t" + j,"t"+num,"");
+                                    operacions.add(o);
+                                    num++;
 
-
-                                        o = new Operacio("+", arg1, "t" + num,"t"+num);
-                                        operacions.add(o);
-                                        num++;
-
-                                    }
-
-
-
-
-
-
-
-
-
-
-                                    resta = 1;
                                 }
+
+                                resta = 1;
+
+
+                                break;
+                            case ")":
+
+                                num--;
+                                o = new Operacio(auxComp, aux, "t" + num,""+ifnivell,"if");
+                                operacions.add(o);
+                                i++;
+                                num++;
+                                break;
+
+
+                            case "<":case "==":case "<=":case ">=":
+
+                                auxComp=tokens.get(i+1);
+                                num--;
+                                aux="t"+num;
+                                num++;
+                                primer=1;
+                                if(tokens.get(i-1).equals("(")){
+
+                                    aux=tokens.get(i);
+
+                                }
+
+                                if(tokens.get(i+3).equals(")")){
+
+                                    num--;
+                                    o = new Operacio(auxComp, aux, tokens.get(i+2),""+ifnivell,"if");
+                                    operacions.add(o);
+                                    i++;
+                                    num++;
+                                    i=i+3;
+
+                                }
+
+                                break;
+
 
 
                         }
+
+
+
+
 
 
 
