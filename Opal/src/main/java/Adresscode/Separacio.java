@@ -99,7 +99,7 @@ public class Separacio {
                                 if(whilee.get(0)==ifnivell2.get(0)){
 
 
-                                    o=new Operacio("Fiif","","", ""+ ifnivell2.get(0),"");
+                                    o=new Operacio("Fiwhile","","", ""+ ifnivell2.get(0),"");
                                     operacions.add(o);
                                     ifnivell2.removeFirst();
                                     whilee.removeFirst();
