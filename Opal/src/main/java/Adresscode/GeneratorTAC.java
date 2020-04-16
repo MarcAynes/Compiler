@@ -25,7 +25,7 @@ public class GeneratorTAC {
                         stringToWrite.append(operation.getArg1()).append(" ").append(operation.getOp()).append(" ").append(operation.getArg2()).append(";\n");
                     } else {
                         stringToWrite.append("t").append(temporal).append(" ").append("=").append(" ").append(operation.getArg1()).append(" ").append(operation.getOp()).append(" ").append(operation.getArg2()).append(";\n");
-                        stringToWrite.append("if(!t").append(temporal).append(") goto fiif").append(operation.getResult()).append("\n");
+                        stringToWrite.append("if(!t").append(temporal).append(") goto Fiif").append(operation.getResult()).append("\n");
                     }
                 }
             } else if (operation.getTipus().equals("while")) {
