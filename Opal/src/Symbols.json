@@ -78,5 +78,9 @@
   {
     "Reserved_Word": "}",
     "Type": 10
+  },
+  {
+    "Reserved_Word": "while",
+    "Type": 7
   }
 ]
