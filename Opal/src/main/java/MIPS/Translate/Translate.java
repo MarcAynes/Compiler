@@ -102,7 +102,7 @@ public class Translate {
                             table.add(s);
 
                             output.write("sub $sp, $sp, " + (table.search(tokens.get(i)).actualType.equals("char") ? 1 : 4) + "\n");
-                            output.write("move " + table.search(tokens.get(i)).position + "($fp), " + s.position + "($fp)\n");
+                            output.write("move " + s.position + "($fp), " + table.search(tokens.get(i)).position + "($fp)\n");
 
                             i++;        //move pointer of the string to the ;
                             continue;
@@ -112,6 +112,7 @@ public class Translate {
                         if (tokens.get(i+1).equals("+") || tokens.get(i+1).equals("-")){
                             //declaration of variable with operation, this operation can be +, - at this moment, but in the future could be comparator
                             boolean integer = false;
+                            s.position = totalBytes;
                             totalBytes += 1;
 
                             //at least one of the 2 variables have to be int or float to asign 4 bytes of memory if not
@@ -123,12 +124,11 @@ public class Translate {
 
                             output.write("sub $sp, $sp, " + (integer ? 4 : 1) + "\n");
 
-                            s.position = totalBytes;
                             s.actualType = "int";
                             table.add(s);
 
                             String aux = "";
-                            aux += tokens.get(i).equals("-") ? "sub $t0, " : "add $t0, ";
+                            aux += tokens.get(i+1).equals("-") ? "sub $t0, " : "add $t0, ";
 
                             if (table.search(tokens.get(i)) != null){       //if tis a variablem store de data
                                 output.write("lw $t0, " + table.search(tokens.get(i)).position + "($fp)\n");
@@ -137,9 +137,9 @@ public class Translate {
                             }
 
                             if (table.search(tokens.get(i+2)) != null){
-                                output.write("lw $t1, " + table.search(tokens.get(i)).position + "($fp)\n");
+                                output.write("lw $t1, " + table.search(tokens.get(i+2)).position + "($fp)\n");
                             }else{
-                                output.write("li $t1, " + tokens.get(i) + "\n");
+                                output.write("li $t1, " + tokens.get(i+2) + "\n");
                             }
 
                             aux += "$t0, $t1\n";
@@ -147,7 +147,7 @@ public class Translate {
 
                             output.write("sw $t0, " + s.position + "$(fp)\n");
 
-                            i += 4;     //move pointer of the string to the ;
+                            i += 3;     //move pointer of the string to the ;
 
                             continue;
 
@@ -156,6 +156,42 @@ public class Translate {
                         //TODO: declaration of variable with comparation, ex: T1 = T2 == T3; It could be a label too.
 
                     }
+
+                    if (tokens.get(i+3).equals(";") || tokens.get(i+3).equals("+") || tokens.get(i+3).equals("-")) {    //its asignation
+
+                        i += 2;             //move string pointer to the first variable/literal after =
+                        if (tokens.get(i+1).equals("+") || tokens.get(i+1).equals("-")) {
+                            if (table.search(tokens.get(i)) != null) {
+                                output.write("lw $t0, " + table.search(tokens.get(i)).position + "($fp)\n");
+                            } else {
+                                output.write("li $t0, " + tokens.get(i) + "\n");
+                            }
+
+                            if (table.search(tokens.get(i+2)) != null){
+                                output.write("lw $t1, " + table.search(tokens.get(i+2)).position + "($fp)\n");
+                            }else{
+                                output.write("li $t1, " + tokens.get(i+2) + "\n");
+                            }
+
+                            output.write(tokens.get(i+1).equals("-") ? "sub $t0, $t0, $t1\n" : "add $t0, $t0, $t1\n");
+                            output.write("sw $t0, " + s.position + "$(fp)\n");
+
+                            i += 3;
+                            continue;
+
+                        }
+
+                        if (table.search(tokens.get(i)) != null) {
+
+                            output.write("move "  + s.position + "($fp), " + table.search(tokens.get(i)).position + "($fp)\n");
+                        } else {
+                            output.write("li $t0, " + tokens.get(i) + "\n");
+                            output.write("sw, $t0, " + s.position + "($fp)\n");
+                        }
+                        i++;
+                        continue;
+                    }
+
 
                 }
             }
