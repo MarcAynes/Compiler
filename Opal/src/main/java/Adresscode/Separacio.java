@@ -226,7 +226,7 @@ public class Separacio {
 
 
                                 if(primer==1){
-                                    primerM=2;
+                                    primerM=3;
                                     primer=0;
 
                                     tipus = tokens.get(i + 1);
@@ -276,9 +276,14 @@ public class Separacio {
 
                                         primerM=0;
                                         int num2=num-1;
-                                        o=new Operacio("+",auxiliar.getArg1(),"t"+num2,"t"+num,"");
-                                       operacions.add(o);
-                                        num++;
+                                        if(auxiliar.getArg1()!=null){
+
+                                            o=new Operacio("+",auxiliar.getArg1(),"t"+num2,"t"+num,"");
+                                            operacions.add(o);
+                                            num++;
+
+                                        }
+
 
 
                                     }
