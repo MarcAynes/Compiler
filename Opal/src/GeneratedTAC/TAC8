@@ -10,11 +10,11 @@ t3 = t2 <= 10;
 if(!t3) goto Fiif2
 b = a;
 t3 = - 'a';
-t4 = c + t3;
+t4 = c + t2;
 t5 = 'a' + 3;
 t6 = b + a;
-t7 = t6 + 5.6;
-t8 = t5 == t7;
+t7 = t5 + 5.6;
+t8 = t4 == t6;
 if(!t8) goto Fiif3
 a = c;
 Fiif3
