@@ -40,7 +40,7 @@ public class Translate {
             output.write("move $fp, $sp\n");
 
 
-            for (int i = 0; i < tokens.size(); i++){
+            for (int i = 0; i < tokens.size(); i++){        // pepe = pepe + 1; i = 0
 
                 if (tokens.get(i).equals("if")){
                     auxTokens.add(tokens.get(i));
@@ -196,6 +196,7 @@ public class Translate {
                 }
             }
         }
+        output.close();
 
         return true;
     }

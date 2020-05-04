@@ -21,5 +21,7 @@ public class MIPS {
         }catch (IOException e){
             e.printStackTrace();
         }
+
+        
     }
 }
