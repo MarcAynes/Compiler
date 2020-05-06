@@ -38,8 +38,13 @@ public class Translate {
             output.write("move $fp, $sp\n");
 
             for (int i = 0; i < tokens.size(); i++){        // pepe = pepe + 1; i = 0
-                if(tokens.get(i).equals()){
-
+                if(tokens.get(i).startsWith("Fiif") || tokens.get(i).startsWith("Fiwhile") || tokens.get(i).startsWith("loop")){
+                    output.write("$"+tokens.get(i) + ":\n");
+                    continue;
+                }
+                if(tokens.get(i).equals("goto")){
+                    i++; //vaig al label
+                    output.write("b $" +tokens.get(i) + "\n");
                 }
                 if (tokens.get(i).equals("if")){
                     auxTokens.add(tokens.get(i));
@@ -59,7 +64,7 @@ public class Translate {
                         aux = "bne ";
                     }
                     i+=3; //vaig al label
-                    aux += "$t0, $t1, $" + tokens.get(i);
+                    aux += "$t0, $t1, $" + tokens.get(i) + "\n";
                     output.write(aux);
                     i++; //vaig al ;
                  continue;
