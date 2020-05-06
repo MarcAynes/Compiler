@@ -51,6 +51,13 @@ public class Translate {
                     auxTokens.add(tokens.get(i));
                     i+= 2;                          //i = 2; i -> "!"
 
+                    String aux = "beq ";
+                    if (tokens.get(i).equals("!")){
+                        //negar condicio
+                        i++;
+                        aux = "bne ";
+                    }
+
                     if (table.search(tokens.get(i)) != null){       //if tis a variablem store de data
                         output.write("lw $t0, " + table.search(tokens.get(i)).position + "($fp)\n");
                     }else{
@@ -58,15 +65,11 @@ public class Translate {
                     }
 
                     output.write("li $t1,0\n");
-                    String aux = "beq ";
-                    if (tokens.get(i).equals("!")){
-                        //negar condicio
-                        i++;
-                        aux = "bne ";
-                    }
+
                     i+=3; //vaig al label
                     aux += "$t0, $t1, $" + tokens.get(i) + "\n";
                     output.write(aux);
+
                     i++; //vaig al ;
                  continue;
                 }
