@@ -16,12 +16,9 @@ public class MIPS {
         mipsScanner scanner = new mipsScanner("src/GeneratedTAC/TAC" + i /*args[0]*/);
         Translate translate = new Translate(symbolTable, scanner);
         try {
-
             translate.letsGoo(file);
         }catch (IOException e){
             e.printStackTrace();
         }
-
-        
     }
 }

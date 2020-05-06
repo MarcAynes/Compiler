@@ -93,9 +93,7 @@ public class mipsScanner {
                                     tokens.add(token);
                                 }
                             }
-
                         }
-
                     }
                 } else {
                     return null;
@@ -105,7 +103,6 @@ public class mipsScanner {
                 e.printStackTrace();
             }
         }while(tokens.size() == 0);
-
 
         return tokens.remove(0);
     }

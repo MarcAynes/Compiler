@@ -27,6 +27,4 @@ public class Symbol {
         this.Type = Type;
         this.position = position;
     }
-
-
 }

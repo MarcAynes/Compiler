@@ -32,26 +32,36 @@ public class Translate {
 
         if (tokens != null && output != null){
 
-
-
             output.write(".text\n");
             output.write(".globl main\n");
             output.write("main:\n");
             output.write("move $fp, $sp\n");
 
-
             for (int i = 0; i < tokens.size(); i++){        // pepe = pepe + 1; i = 0
+                if(tokens.get(i).equals()){
 
+                }
                 if (tokens.get(i).equals("if")){
                     auxTokens.add(tokens.get(i));
                     i+= 2;
 
+                    if (table.search(tokens.get(i)) != null){       //if tis a variablem store de data
+                        output.write("lw $t0, " + table.search(tokens.get(i)).position + "($fp)\n");
+                    }else{
+                        output.write("li $t0, " + tokens.get(i) + "\n");
+                    }
+
+                    output.write("li $t1,0\n");
+                    String aux = "beq ";
                     if (tokens.get(i).equals("!")){
                         //negar condicio
                         i++;
+                        aux = "bne ";
                     }
-
-
+                    i+=3; //vaig al label
+                    aux += "$t0, $t1, $" + tokens.get(i);
+                    output.write(aux);
+                    i++; //vaig al ;
                  continue;
                 }
 
@@ -114,17 +124,18 @@ public class Translate {
                             boolean integer = false;
                             s.position = totalBytes;
                             totalBytes += 1;
+                            s.actualType = "char";
 
                             //at least one of the 2 variables have to be int or float to asign 4 bytes of memory if not
                             if ((table.search(tokens.get(i)) != null && table.search(tokens.get(i)).actualType.equals("int")) || isFloat(tokens.get(i)) || isInt(tokens.get(i)) || isFloat(tokens.get(i+2)) || isInt(tokens.get(i+2))
                                     || (table.search(tokens.get(i)) != null && table.search(tokens.get(i+2)).actualType.equals("int"))){
                                 integer = true;
                                 totalBytes += 3;
+                                s.actualType = "int";
                             }
 
                             output.write("sub $sp, $sp, " + (integer ? 4 : 1) + "\n");
 
-                            s.actualType = "int";
                             table.add(s);
 
                             String aux = "";
@@ -152,9 +163,72 @@ public class Translate {
                             continue;
 
                         }
+                        if (tokens.get(i).equals("==") || tokens.get(i).equals("!=") || tokens.get(i+1).equals("<") || tokens.get(i+1).equals("<=") || tokens.get(i+1).equals(">") || tokens.get(i+1).equals(">=")){
+                            s.position = totalBytes;
+                            totalBytes += 1;
 
-                        //TODO: declaration of variable with comparation, ex: T1 = T2 == T3; It could be a label too.
+                            output.write("sub $sp, $sp, " + 1 + "\n");
 
+                            s.actualType = "char";
+                            table.add(s);
+
+                            //guardo els valors de la comparació
+                            if (table.search(tokens.get(i)) != null){       //if tis a variablem store de data
+                                output.write("lw $t0, " + table.search(tokens.get(i)).position + "($fp)\n");
+                            }else{
+                                output.write("li $t0, " + tokens.get(i) + "\n");
+                            }
+
+                            if (table.search(tokens.get(i+2)) != null){
+                                output.write("lw $t1, " + table.search(tokens.get(i+2)).position + "($fp)\n");
+                            }else{
+                                output.write("li $t1, " + tokens.get(i+2) + "\n");
+                            }
+
+                            //busco el resultat de la comparació
+                            i+=1;
+                            String aux = "";
+
+                            if(tokens.get(i).equals("==") || tokens.get(i).equals("!=")){
+                                aux += "xor $t2,$t0,$t1\n";
+                                switch (tokens.get(i)){
+                                    case "==":
+                                        aux += "sltu $t2,$t2,1\n";
+                                        break;
+                                    case "!=":
+                                        aux += "li $t4,0\n";
+                                        aux += "sltu $t2,$t4,$t2\n";
+                                        break;
+                                }
+                                aux += "andi $t2,$t2,0x00ff\n";
+                            }
+                            else {
+                                aux += "slt $t2, ";
+                                switch (tokens.get(i)) {
+                                    case "<":
+                                        aux += "$t0, $t1\n";
+                                        break;
+                                    case "<=":
+                                        aux += "$t1, $t0\n";
+                                        aux += "xori $t2, $t2, 0x1\n";
+                                        break;
+                                    case ">":
+                                        aux += "$t1, $t0\n";
+                                        break;
+                                    case ">=":
+                                        aux += "$t0, $t1\n";
+                                        aux += "xori $t2, $t2, 0x1\n";
+                                        break;
+
+                                }
+                                aux += "andi $t2, $t2, 0x00ff\n";
+                            }
+
+                            output.write(aux);
+                            output.write("sw $t2, " + s.position + "$(fp)\n");
+                            i += 2; //vaig al ;
+                            continue;
+                        }
                     }
 
                     if (tokens.get(i+3).equals(";") || tokens.get(i+3).equals("+") || tokens.get(i+3).equals("-")) {    //its asignation
