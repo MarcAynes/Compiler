@@ -45,10 +45,11 @@ public class Translate {
                 if(tokens.get(i).equals("goto")){
                     i++; //vaig al label
                     output.write("b $" +tokens.get(i) + "\n");
+                    continue;
                 }
-                if (tokens.get(i).equals("if")){
+                if (tokens.get(i).equals("if")){    //if(!t1) i = 0; i -> "if"
                     auxTokens.add(tokens.get(i));
-                    i+= 2;
+                    i+= 2;                          //i = 2; i -> "!"
 
                     if (table.search(tokens.get(i)) != null){       //if tis a variablem store de data
                         output.write("lw $t0, " + table.search(tokens.get(i)).position + "($fp)\n");
