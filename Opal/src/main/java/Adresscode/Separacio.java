@@ -197,9 +197,10 @@ public class Separacio {
                                 o = new Operacio(tipus, arg2, " ","t"+num,"");
 
                                 operacions.add(o);
-                                num++;
+                               
 
                                 if(primer==0){
+
                                     num--;
                                     arg1 = "t" +num;
                                     num++;
@@ -210,11 +211,12 @@ public class Separacio {
                                     num++;
 
                                 }else{
-
+                                    num++;
                                     j=num-1;
                                     o = new Operacio("+", arg1, "t" + j,"t"+num,"");
                                     operacions.add(o);
                                     num++;
+
 
                                 }
 
