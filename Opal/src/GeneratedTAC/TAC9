@@ -1,3 +1,4 @@
+a = 0;
 a = 5;
 t1 = a <= 10;
 if(!t1) goto Fiif1
