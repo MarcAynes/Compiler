@@ -14,7 +14,7 @@ public class Main {
     static SymbolTable symbolTable = new SymbolTable("src/Symbols.json");
 
     public static void main(String[] args) {
-        for (int i = 1; i <= 14; i++) {
+        for (int i = 1; i <= 15; i++) {
             boolean ok;
             Scanner scanner = new Scanner("src/tests/test" + i /*args[0]*/);
             System.out.println("****************** test" + i+ " ************************");
