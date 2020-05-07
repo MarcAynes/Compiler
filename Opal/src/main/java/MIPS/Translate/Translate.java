@@ -109,7 +109,7 @@ public class Translate {
 
                                 output.write("sub $sp, $sp, 1\n");
                                 output.write("li $t0, " + tokens.get(i) + "\n");
-                                output.write("sw, $t0, " + s.position + "($fp)\n");
+                                output.write("sb, $t0, " + s.position + "($fp)\n");
 
                                 i++;        //move pointer of the string to the ;
                                 continue;
@@ -165,7 +165,11 @@ public class Translate {
                             aux += "$t0, $t1\n";
                             output.write(aux);
 
-                            output.write("sw $t0, " + s.position + "$(fp)\n");
+                            if (s.actualType.equals("int")) {
+                                output.write("sw $t0, " + s.position + "$(fp)\n");
+                            }else{
+                                output.write("sb $t0, " + s.position + "$(fp)\n");
+                            }
 
                             i += 3;     //move pointer of the string to the ;
 
