@@ -71,7 +71,33 @@ public class Separacio {
 
                         if (tokens.get(i).equals("float") || tokens.get(i).equals("int") || tokens.get(i).equals("char") || tokens.get(i).equals("if") || tokens.get(i).equals("}")|| tokens.get(i).equals("while")) {
 
+                            if(tokens.get(i).equals("float") ){
 
+
+                                o=new Operacio("=",tokens.get(i+1),"0.0", " ","");
+                                operacions.add(o);
+
+
+
+                            }
+                            if(tokens.get(i).equals("int") ){
+
+
+                                o=new Operacio("=",tokens.get(i+1),"0", " ","");
+                                operacions.add(o);
+
+
+
+                            }
+                            if(tokens.get(i).equals("char") ){
+
+
+                                o=new Operacio("=",tokens.get(i+1),"'0'", " ","");
+                                operacions.add(o);
+
+
+
+                            }
 
                             if(tokens.get(i).equals("if")){
 
@@ -197,7 +223,7 @@ public class Separacio {
                                 o = new Operacio(tipus, arg2, " ","t"+num,"");
 
                                 operacions.add(o);
-                               
+
 
                                 if(primer==0){
 
