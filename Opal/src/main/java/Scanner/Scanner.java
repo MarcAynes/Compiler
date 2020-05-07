@@ -15,7 +15,7 @@ import java.util.List;
  */
 
 public class Scanner {
-
+    int linia = 0;
     private Trie trie = new Trie();
     List<String> tokens = new ArrayList<>();
     private BufferedReader br;
@@ -48,67 +48,68 @@ public class Scanner {
         if (tokens.size() > 0){
             return tokens.remove(0);
         }
+        do {
+            try {
+                linia++;
+                String aux = br.readLine();
+                while (aux != null && aux.length() == 0) {
+                    aux = br.readLine();
+                }
+                if (aux != null) {
+                    char[] frase = aux.toCharArray();
 
-        try {
+                    String token = "";
+                    for (int i = 0; i < frase.length; i++) {
 
-            String aux = br.readLine();
-            while(aux != null && aux.length() == 0){
-                aux = br.readLine();
-            }
-            if (aux != null) {
-                char[] frase = aux.toCharArray();
+                        char[] a = new char[1];
+                        a[0] = frase[i];
+                        Return r = trie.search(a);
 
-                String token = "";
-                for (int i = 0; i < frase.length; i++) {
-
-                    char[] a = new char[1];
-                    a[0] = frase[i];
-                    Return r = trie.search(a);
-
-                    if (r.nombre == 1) {
-                        if (token != "") {
-                            tokens.add(token);
-                            token = "";
-                        }
-                        int index = trie.compara(frase, i);
-                        if (index > -1){
-                            while(i <= index){
-                                token += frase[i];
-                                i++;
-                            }
-                            i--;
-                        }else{
-                            token += frase[i];
-                        }
-
-                        tokens.add(token);
-                        token = "";
-
-                    } else {
-
-                        if (frase[i] == ' ' || frase[i] == '\t' || frase[i] == '\n') {
-                            if (token.length() > 0 && i > 0 && (frase[i-1] != ' ' && frase[i-1] != '\t' && frase[i-1] != '\n')) {
+                        if (r.nombre == 1) {
+                            if (token != "") {
                                 tokens.add(token);
                                 token = "";
                             }
-                        } else {
-                            token += frase[i];
-
-                            if (i+1 == frase.length){
-                                tokens.add(token);
+                            int index = trie.compara(frase, i);
+                            if (index > -1) {
+                                while (i <= index) {
+                                    token += frase[i];
+                                    i++;
+                                }
+                                i--;
+                            } else {
+                                token += frase[i];
                             }
+
+                            tokens.add(token);
+                            token = "";
+
+                        } else {
+
+                            if (frase[i] == ' ' || frase[i] == '\t' || frase[i] == '\n') {
+                                if (token.length() > 0 && i > 0 && (frase[i - 1] != ' ' && frase[i - 1] != '\t' && frase[i - 1] != '\n')) {
+                                    tokens.add(token);
+                                    token = "";
+                                }
+                            } else {
+                                token += frase[i];
+
+                                if (i + 1 == frase.length) {
+                                    tokens.add(token);
+                                }
+                            }
+
                         }
 
                     }
-
+                } else {
+                    return null;
                 }
-            }else{
-                return null;
-            }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }while(tokens.size() == 0);
 
 
         return tokens.remove(0);
@@ -124,4 +125,5 @@ public class Scanner {
         }
         return tokens;
     }
+
 }

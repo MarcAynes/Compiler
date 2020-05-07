@@ -6,9 +6,9 @@ import java.nio.file.Paths;
 
 public class Optimizer {
 
-    public File optimization(File file)
+    public File optimization(File file, int i)
     {
-        File newFile = new File("src/OptimizedCode/OptimizedTAC");
+        File newFile = new File("src/OptimizedCode/OptimizedTAC" + i);
         StringBuilder text = new StringBuilder();
 
         try(BufferedReader input = Files.newBufferedReader(Paths.get(String.valueOf(file)))){

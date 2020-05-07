@@ -16,6 +16,10 @@
     "Type": 3
   },
   {
+    "Reserved_Word": "*",
+    "Type": 3
+  },
+  {
     "Reserved_Word": "int",
     "Type": 4
   },
@@ -33,6 +37,10 @@
   },
   {
     "Reserved_Word": "if",
+    "Type": 7
+  },
+  {
+    "Reserved_Word": "while",
     "Type": 7
   },
   {

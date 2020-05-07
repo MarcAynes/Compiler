@@ -1,5 +1,5 @@
 package Scanner;
 
 public interface trieInt {
-        public void EliminaFill(Node node);
+    public void EliminaFill(Node node);
 }

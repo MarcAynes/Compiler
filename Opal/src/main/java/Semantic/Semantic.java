@@ -113,6 +113,25 @@ public class Semantic {
                         }
                     }
                 }
+            }else{
+                if (s.Type == 7){
+                    /*if (s.Reserved_Word.equals("if")) {
+                        posicio_inici++;
+                        s = symbols.search(tokens.get(posicio_inici)); // '('
+                        posicio_inici++;
+                        s = symbols.search(tokens.get(posicio_inici));
+                        String typeLeft;
+
+                        if (symbols.search(s.Reserved_Word) != null && symbols.search(s.Reserved_Word).Type == 0){ //variable
+                            typeLeft = typeTable.get(s.Reserved_Word).varType;
+                        }else{                                                                                     //nombre
+
+                        }
+
+                    }else{ //s.Reserved_Word.equals("else")
+
+                    }*/
+                }
             }
         }
     }
