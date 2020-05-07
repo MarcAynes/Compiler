@@ -5,7 +5,7 @@ if(!t1) goto Fiif1
 a = 3;
 Fiif1
 loop2
-t1 = b <= t0;
+t1 = a != 2;
 if(!t1) goto Fiwhile2
 b = 0;
 goto loop2
