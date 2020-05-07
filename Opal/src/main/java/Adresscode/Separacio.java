@@ -306,7 +306,7 @@ public class Separacio {
                                 break;
 
 
-                            case "<":case "==":case "<=":case ">=":
+                            case "<":case "==":case "<=":case ">=": case">": case"!=":
 
                                 primerM=1;
                                 auxComp=tokens.get(i+1);

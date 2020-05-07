@@ -2,6 +2,7 @@ a = 0;
 loop1
 t1 = a < 1;
 if(!t1) goto Fiwhile1
-a = 1;
+t1 = a + 1;
+a = t1;
 goto loop1
 Fiwhile1

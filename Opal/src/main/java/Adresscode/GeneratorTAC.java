@@ -17,7 +17,7 @@ public class GeneratorTAC {
 
         for (Operacio operation : operations) {
             if (operation.getTipus().equals("if")) {
-                if (operation.getOp().equals("==") || operation.getOp().equals("<=") || operation.getOp().equals("<") || operation.getOp().equals(">") || operation.getOp().equals(">=")) {
+                if (operation.getOp().equals("!=") || operation.getOp().equals("==") || operation.getOp().equals("<=") || operation.getOp().equals("<") || operation.getOp().equals(">") || operation.getOp().equals(">=")) {
                     if (operation.getOp().equals("-")) {
                         stringToWrite.append("t").append(temporal).append(" ").append("=").append(" ").append("0").append(" ").append(operation.getOp()).append(" ").append(operation.getArg1()).append(";\n");
                         temporal++;
@@ -33,7 +33,7 @@ public class GeneratorTAC {
                 }
             } else if (operation.getTipus().equals("while")) {
                 stringToWrite.append("loop").append(operation.getResult()).append("\n");
-                if (operation.getOp().equals("==") || operation.getOp().equals("<=") || operation.getOp().equals("<") || operation.getOp().equals(">") || operation.getOp().equals(">=")) {
+                if (operation.getOp().equals("!=") || operation.getOp().equals("==") || operation.getOp().equals("<=") || operation.getOp().equals("<") || operation.getOp().equals(">") || operation.getOp().equals(">=")) {
                     if (operation.getOp().equals("-")) {
                         stringToWrite.append("t").append(temporal).append(" ").append("=").append(" ").append("0").append(" ").append(operation.getOp()).append(" ").append(operation.getArg1()).append(";\n");
                         temporal++;
