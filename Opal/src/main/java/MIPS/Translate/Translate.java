@@ -33,6 +33,7 @@ public class Translate {
         if (tokens != null && output != null){
 
             output.write(".text\n");
+            output.write(".data\n");
             output.write(".globl main\n");
             output.write("main:\n");
             output.write("move $fp, $sp\n");
