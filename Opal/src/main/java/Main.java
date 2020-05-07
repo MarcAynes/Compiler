@@ -26,7 +26,7 @@ public class Main {
             ok = parser.syntaxAnalysis();
             if (!ok) {
                 symbolTable = new SymbolTable("src/Symbols.json");
-               // continue;
+                continue;
             }
             scanner = new Scanner("src/tests/test" + i /*args[0]*/);
             Separacio separacio = new Separacio(scanner);
