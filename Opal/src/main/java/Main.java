@@ -5,6 +5,9 @@ import Optimization.Optimizer;
 import Parser.Parser;
 import Scanner.Scanner;
 import TaulaDeSimbols.SymbolTable;
+import MIPS.MIPS;
+
+import javax.imageio.plugins.bmp.BMPImageWriteParam;
 
 public class Main {
 
@@ -30,6 +33,8 @@ public class Main {
             separacio.separar();
             optimizer.optimization(generatorTAC.generator(separacio, i), i);
             symbolTable = new SymbolTable("src/Symbols.json");
+
+            MIPS mips = new MIPS(i);
         }
     }
 }
