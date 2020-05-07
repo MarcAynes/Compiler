@@ -1,6 +1,8 @@
 package Adresscode;
 
 public class Operacio {
+    public Operacio() {
+    }
 
     private String op;
     private String arg1;

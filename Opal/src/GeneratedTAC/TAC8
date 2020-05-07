@@ -9,7 +9,7 @@ t2 = a + 1;
 t3 = t2 <= 10;
 if(!t3) goto Fiif2
 b = a;
-t3 = - 'a';
+t3 = 0 - 'a';
 t4 = c + t3;
 t5 = 'a' + 3;
 t6 = b + a;
