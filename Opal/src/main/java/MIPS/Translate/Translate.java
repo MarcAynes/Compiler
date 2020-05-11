@@ -129,7 +129,7 @@ public class Translate {
 
                         }
 
-                        if (tokens.get(i+1).equals("+") || tokens.get(i+1).equals("-")){
+                        if (tokens.get(i+1).equals("+") || tokens.get(i+1).equals("-") || tokens.get(i+1).equals("*")){
                             //declaration of variable with operation, this operation can be +, - at this moment, but in the future could be comparator
                             boolean integer = false;
                             s.position = totalBytes;
@@ -149,7 +149,7 @@ public class Translate {
                             table.add(s);
 
                             String aux = "";
-                            aux += tokens.get(i+1).equals("-") ? "sub $t0, " : "add $t0, ";
+                            aux += tokens.get(i+1).equals("-") ? "sub $t0, " : tokens.get(i+1).equals("+") ? "add $t0, " : "mult $t0, ";
 
                             if (table.search(tokens.get(i)) != null){       //if tis a variablem store de data
                                 output.write("lw $t0, " + table.search(tokens.get(i)).position + "($fp)\n");
@@ -163,7 +163,18 @@ public class Translate {
                                 output.write("li $t1, " + tokens.get(i+2) + "\n");
                             }
 
-                            aux += "$t0, $t1\n";
+                            if  (tokens.get(i+1).equals("*")){
+
+                                aux += "$t1\n";
+                                output.write(aux);
+
+                                aux = "mflo $t0\n";
+
+                            }else {
+
+                                aux += "$t0, $t1\n";
+                            }
+
                             output.write(aux);
 
                             if (s.actualType.equals("int")) {
@@ -245,10 +256,10 @@ public class Translate {
                         }
                     }
 
-                    if (tokens.get(i+3).equals(";") || tokens.get(i+3).equals("+") || tokens.get(i+3).equals("-")) {    //its asignation
+                    if (tokens.get(i+3).equals(";") || tokens.get(i+3).equals("+") || tokens.get(i+3).equals("-") || tokens.get(i+3).equals("*")) {    //its asignation
 
                         i += 2;             //move string pointer to the first variable/literal after =
-                        if (tokens.get(i+1).equals("+") || tokens.get(i+1).equals("-")) {
+                        if (tokens.get(i+1).equals("+") || tokens.get(i+1).equals("-") || tokens.get(i+1).equals("*")) {
                             if (table.search(tokens.get(i)) != null) {
                                 output.write("lw $t0, " + table.search(tokens.get(i)).position + "($fp)\n");
                             } else {
@@ -261,8 +272,9 @@ public class Translate {
                                 output.write("li $t1, " + tokens.get(i+2) + "\n");
                             }
 
-                            output.write(tokens.get(i+1).equals("-") ? "sub $t0, $t0, $t1\n" : "add $t0, $t0, $t1\n");
-                            output.write("sw $t0, " + s.position + "$(fp)\n");
+                            output.write(tokens.get(i+1).equals("-") ? "sub $t0, $t0, $t1\n" : tokens.get(i+1).equals("+") ?  "add $t0, $t0, $t1\n" : "mult $t0, $t1\n");
+
+                            output.write(tokens.get(i+1).equals("-") || tokens.get(i+1).equals("+") ? "sw $t0, " + s.position + "$(fp)\n" : "mflo $t0\nsw $t0, " + s.position + "$(fp)\n");
 
                             i += 3;
                             continue;
