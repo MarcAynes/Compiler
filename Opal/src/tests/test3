@@ -2,9 +2,9 @@ int a;
 a = 2;
 int b;
 b = 5;
-if (b > 5){
+if (b <= 5){
     a = 3;
 }
-while (a == 2){
+while (a != 2){
     b = 0;
 }

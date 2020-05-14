@@ -12,6 +12,10 @@
     "Type": 2
   },
   {
+    "Reserved_Word": "*",
+    "Type": 2
+  },
+  {
     "Reserved_Word": "<",
     "Type": 3
   },
@@ -25,6 +29,10 @@
   },
   {
     "Reserved_Word": ">=",
+    "Type": 3
+  },
+  {
+    "Reserved_Word": "!=",
     "Type": 3
   },
   {

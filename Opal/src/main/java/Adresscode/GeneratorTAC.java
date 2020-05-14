@@ -17,9 +17,12 @@ public class GeneratorTAC {
 
         for (Operacio operation : operations) {
             if (operation.getTipus().equals("if")) {
-                if (operation.getOp().equals("==") || operation.getOp().equals("<=") || operation.getOp().equals("<") || operation.getOp().equals(">") || operation.getOp().equals(">=")) {
+                if (operation.getOp().equals("!=") || operation.getOp().equals("==") || operation.getOp().equals("<=") || operation.getOp().equals("<") || operation.getOp().equals(">") || operation.getOp().equals(">=")) {
                     if (operation.getOp().equals("-")) {
-                        stringToWrite.append("t").append(temporal).append(" ").append("=").append(" ").append(operation.getOp()).append(" ").append(operation.getArg1()).append(";\n");
+                        stringToWrite.append("t").append(temporal).append(" ").append("=").append(" ").append("0").append(" ").append(operation.getOp()).append(" ").append(operation.getArg1()).append(";\n");
+                        temporal++;
+                    } else if(operation.getOp().equals("*")){
+                        stringToWrite.append("t").append(temporal).append(" ").append("=").append(" ").append(operation.getArg1()).append(" ").append(operation.getOp()).append(" ").append(operation.getArg2()).append(";\n");
                         temporal++;
                     } else if (operation.getOp().equals("=")) {
                         stringToWrite.append(operation.getArg1()).append(" ").append(operation.getOp()).append(" ").append(operation.getArg2()).append(";\n");
@@ -30,11 +33,15 @@ public class GeneratorTAC {
                 }
             } else if (operation.getTipus().equals("while")) {
                 stringToWrite.append("loop").append(operation.getResult()).append("\n");
-                if (operation.getOp().equals("==") || operation.getOp().equals("<=") || operation.getOp().equals("<") || operation.getOp().equals(">") || operation.getOp().equals(">=")) {
+                if (operation.getOp().equals("!=") || operation.getOp().equals("==") || operation.getOp().equals("<=") || operation.getOp().equals("<") || operation.getOp().equals(">") || operation.getOp().equals(">=")) {
                     if (operation.getOp().equals("-")) {
-                        stringToWrite.append("t").append(temporal).append(" ").append("=").append(" ").append(operation.getOp()).append(" ").append(operation.getArg1()).append(";\n");
+                        stringToWrite.append("t").append(temporal).append(" ").append("=").append(" ").append("0").append(" ").append(operation.getOp()).append(" ").append(operation.getArg1()).append(";\n");
                         temporal++;
-                    } else if (operation.getOp().equals("=")) {
+                    }else if(operation.getOp().equals("*")){
+                        stringToWrite.append("t").append(temporal).append(" ").append("=").append(" ").append(operation.getArg1()).append(" ").append(operation.getOp()).append(" ").append(operation.getArg2()).append(";\n");
+                        temporal++;
+                    }
+                    else if (operation.getOp().equals("=")) {
                         stringToWrite.append(operation.getArg1()).append(" ").append(operation.getOp()).append(" ").append(operation.getArg2()).append(";\n");
                     } else {
                         stringToWrite.append("t").append(temporal).append(" ").append("=").append(" ").append(operation.getArg1()).append(" ").append(operation.getOp()).append(" ").append(operation.getArg2()).append(";\n");
@@ -43,7 +50,10 @@ public class GeneratorTAC {
                 }
             }else {
                 if (operation.getOp().equals("-")) {
-                    stringToWrite.append("t").append(temporal).append(" ").append("=").append(" ").append(operation.getOp()).append(" ").append(operation.getArg1()).append(";\n");
+                    stringToWrite.append("t").append(temporal).append(" ").append("=").append(" ").append("0").append(" ").append(operation.getOp()).append(" ").append(operation.getArg1()).append(";\n");
+                    temporal++;
+                } else if(operation.getOp().equals("*")){
+                    stringToWrite.append("t").append(temporal).append(" ").append("=").append(" ").append(operation.getArg1()).append(" ").append(operation.getOp()).append(" ").append(operation.getArg2()).append(";\n");
                     temporal++;
                 } else if (operation.getOp().equals("Fiif")) {
                     stringToWrite.append(operation.getOp()).append(operation.getResult()).append("\n");
