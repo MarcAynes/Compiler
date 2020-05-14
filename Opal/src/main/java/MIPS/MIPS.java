@@ -13,7 +13,7 @@ public class MIPS {
 
     public MIPS(int i){
         File file = new File("src/MIPSAssembly/MIPS"+ i);
-        mipsScanner scanner = new mipsScanner("src/GeneratedTAC/TAC" + i /*args[0]*/);
+        mipsScanner scanner = new mipsScanner("src/OptimizedCode/OptimizedTAC" + i /*args[0]*/);
         Translate translate = new Translate(symbolTable, scanner);
         try {
             translate.letsGoo(file);
