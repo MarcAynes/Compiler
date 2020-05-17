@@ -1,0 +1,70 @@
+[
+  {
+    "Reserved_Word": "=",
+    "Type": 1
+  },
+  {
+    "Reserved_Word": "+",
+    "Type": 2
+  },
+  {
+    "Reserved_Word": "-",
+    "Type": 2
+  },
+  {
+    "Reserved_Word": "*",
+    "Type": 2
+  },
+  {
+    "Reserved_Word": "<",
+    "Type": 3
+  },
+  {
+    "Reserved_Word": ">",
+    "Type": 3
+  },
+  {
+    "Reserved_Word": "<=",
+    "Type": 3
+  },
+  {
+    "Reserved_Word": ">=",
+    "Type": 3
+  },
+  {
+    "Reserved_Word": "!=",
+    "Type": 3
+  },
+  {
+    "Reserved_Word": "==",
+    "Type": 3
+  },
+  {
+    "Reserved_Word": "!=",
+    "Type": 3
+  },
+  {
+    "Reserved_Word": "if",
+    "Type": 4
+  },
+  {
+    "Reserved_Word": "(",
+    "Type": 5
+  },
+  {
+    "Reserved_Word": ")",
+    "Type": 5
+  },
+  {
+    "Reserved_Word": "!",
+    "Type": 6
+  },
+  {
+    "Reserved_Word": "goto",
+    "Type": 7
+  },
+  {
+    "Reserved_Word": ";",
+    "Type": 8
+  }
+]

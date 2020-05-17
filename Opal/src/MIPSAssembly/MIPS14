@@ -1,0 +1,21 @@
+.text
+.globl main
+main:
+move $fp, $sp
+sub $sp, $sp, 4
+li $t0, 0
+sw, $t0, 0($fp)
+li $t0, 2
+sw, $t0, 4($fp)
+$loop1:
+sub $sp, $sp, 1
+li $t0, t1
+li $t1, 1
+slt $t2, $t0, $t1
+andi $t2, $t2, 0x00ff
+sw $t2, 4$(fp)
+lw $t0, 4($fp)
+li $t1,0
+bne $t0, $t1, $Fiwhile1
+b $loop1
+$Fiwhile1:

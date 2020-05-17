@@ -1,0 +1,94 @@
+[
+  {
+    "Reserved_Word": ";",
+    "Type": 1
+  },
+  {
+    "Reserved_Word": "=",
+    "Type": 2
+  },
+  {
+    "Reserved_Word": "+",
+    "Type": 3
+  },
+  {
+    "Reserved_Word": "-",
+    "Type": 3
+  },
+  {
+    "Reserved_Word": "*",
+    "Type": 3
+  },
+  {
+    "Reserved_Word": "int",
+    "Type": 4
+  },
+  {
+    "Reserved_Word": "char",
+    "Type": 4
+  },
+  {
+    "Reserved_Word": "float",
+    "Type": 4
+  },
+  {
+    "Reserved_Word": "main",
+    "Type": 5
+  },
+  {
+    "Reserved_Word": "if",
+    "Type": 7
+  },
+  {
+    "Reserved_Word": "while",
+    "Type": 7
+  },
+  {
+    "Reserved_Word": ">",
+    "Type": 8
+  },
+  {
+    "Reserved_Word": ">=",
+    "Type": 8
+  },
+  {
+    "Reserved_Word": "<=",
+    "Type": 8
+  },
+  {
+    "Reserved_Word": "<",
+    "Type": 8
+  },
+  {
+    "Reserved_Word": "!=",
+    "Type": 8
+  },
+  {
+    "Reserved_Word": "==",
+    "Type": 8
+  },
+  {
+    "Reserved_Word": "(",
+    "Type": 9
+  },
+  {
+    "Reserved_Word": ")",
+    "Type": 9
+  },
+  {
+    "Reserved_Word": "{",
+    "Type": 10
+  },
+  {
+    "Reserved_Word": "}",
+    "Type": 10
+  },
+  {
+    "Reserved_Word": "while",
+    "Type": 7
+  },
+  {
+    "Reserved_Word": "!",
+    "Type": 8
+  }
+]

@@ -1,0 +1,5 @@
+a = 0;
+a = 0;
+t1 = a < t0;
+if(!t1) goto Fiif1
+Fiif1

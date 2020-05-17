@@ -1,0 +1,37 @@
+.text
+.globl main
+main:
+move $fp, $sp
+li $t0, 3
+sw, $t0, 0($fp)
+li $t0, 1
+sw, $t0, 0($fp)
+li $t0, 2
+sw, $t0, 0($fp)
+sub $sp, $sp, 4
+li $t0, 0
+li $t1, 22
+sub $t0, $t0, $t1
+sw $t0, 0$(fp)
+sub $sp, $sp, 1
+li $t0, t3
+lw $t1, 0($fp)
+add $t0, $t0, $t1
+sw $t0, 4$(fp)
+sub $sp, $sp, 4
+lw $t0, 4($fp)
+li $t1, 3
+add $t0, $t0, $t1
+sw $t0, 5$(fp)
+sub $sp, $sp, 4
+lw $t0, 5($fp)
+li $t1, 4
+add $t0, $t0, $t1
+sw $t0, 9$(fp)
+sub $sp, $sp, 4
+lw $t0, 9($fp)
+li $t1, 5
+add $t0, $t0, $t1
+sw $t0, 13$(fp)
+sub $sp, $sp, 4
+move 17($fp), 13($fp)
