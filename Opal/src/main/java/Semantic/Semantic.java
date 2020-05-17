@@ -11,16 +11,17 @@ public class Semantic {
     HashMap<String, Tipus> typeTable = new HashMap<String, Tipus>();
     SemanticalError sm = new SemanticalError();
 
-    public void semanticAnalysis(SymbolTable symbols, List<String> tokens, int posicio_inici){
+    public void semanticAnalysis(List<SymbolTable> symbols, List<String> tokens, int posicio_inici){
 
-        Symbol s = symbols.search(tokens.get(posicio_inici));
+
+        Symbol s = searchInTables(tokens.get(posicio_inici), symbols);
         if (s.Type == 0){       // var
 
             Tipus t = typeTable.get(s.Reserved_Word);
             if (t.varType.equals("int")){
 
                 for(int i = posicio_inici+1; !tokens.get(i).equals(";"); i++){
-                    s = symbols.search(tokens.get(i));
+                    s = searchInTables(tokens.get(posicio_inici), symbols);
                     //System.out.println(tokens.get(i));
                     if (s != null && s.Type == 0 && !(typeTable.get(s.Reserved_Word).varType.equals("int") || typeTable.get(s.Reserved_Word).varType.equals("char"))){
 
@@ -40,7 +41,7 @@ public class Semantic {
 
                     for(int i = posicio_inici+1; !tokens.get(i).equals(";"); i++){
 
-                        s = symbols.search(tokens.get(i));
+                        s = searchInTables(tokens.get(posicio_inici), symbols);
                         //System.out.println(tokens.get(i));
                         if (s != null && s.Type == 0 && !(typeTable.get(s.Reserved_Word).varType.equals("char") || typeTable.get(s.Reserved_Word).varType.equals("int"))){
 
@@ -61,7 +62,7 @@ public class Semantic {
                     if (t.varType.equals("float")){
                         for(int i = posicio_inici+1; !tokens.get(i).equals(";"); i++){
 
-                            s = symbols.search(tokens.get(i));
+                            s = searchInTables(tokens.get(posicio_inici), symbols);
                             //System.out.println(tokens.get(i));
                             if (s != null && s.Type == 0 && !(typeTable.get(s.Reserved_Word).varType.equals("char") || typeTable.get(s.Reserved_Word).varType.equals("int") || typeTable.get(s.Reserved_Word).varType.equals("float"))){
 
@@ -85,7 +86,7 @@ public class Semantic {
             if (s.Type == 4){           //declaration
                 if (s.Reserved_Word.equals("int")) {
 
-                    s = symbols.search(tokens.get(posicio_inici+1));
+                    s = searchInTables(tokens.get(posicio_inici+1), symbols);
                     //System.out.println(tokens.get(posicio_inici+1));
                     if (s.Type == 0){
 
@@ -95,7 +96,7 @@ public class Semantic {
                 }else{
                     if (s.Reserved_Word.equals("char")){
 
-                        s = symbols.search(tokens.get(posicio_inici+1));
+                        s = searchInTables(tokens.get(posicio_inici+1), symbols);
                         //System.out.println(tokens.get(posicio_inici+1));
                         if (s.Type == 0){
 
@@ -104,7 +105,7 @@ public class Semantic {
 
                     }else{
                         if (s.Reserved_Word.equals("float")){
-                            s = symbols.search(tokens.get(posicio_inici+1));
+                            s = searchInTables(tokens.get(posicio_inici+1), symbols);
                             //System.out.println(tokens.get(posicio_inici+1));
                             if (s.Type == 0){
 
@@ -140,4 +141,17 @@ public class Semantic {
     public boolean Errors(){
         return sm.mostrarErrors();
     }
+
+
+    public Symbol searchInTables(String token, List<SymbolTable> taulaS){
+        for (int i = taulaS.size() - 1; i >= 0; i--){
+            Symbol sym = taulaS.get(i).search(token);
+            if(sym != null){
+                return sym;
+            }
+        }
+        return null;
+    }
 }
+
+
