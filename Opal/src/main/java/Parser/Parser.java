@@ -57,6 +57,7 @@ public class Parser {
                         else if (s != null && s.Reserved_Word.equals("}")){
                             taulaS.remove(deepCount);
                             deepCount--;
+                            inici++;
                             break;
                         }
 
@@ -105,7 +106,7 @@ public class Parser {
                                 System.out.println("OK");
                                 nivell = 0;
                                 op = ' ';
-                                //semantic.semanticAnalysis(taulaS), tokens, inici);
+                                semantic.semanticAnalysis(taulaS, tokens, inici);
                                 inici = i+1;
                             }
 
@@ -192,7 +193,7 @@ public class Parser {
                             System.out.println("OK");
                             nivell = 0;
                             op = ' ';
-                            //semantic.semanticAnalysis(taulaS, tokens, inici);
+                            semantic.semanticAnalysis(taulaS, tokens, inici);
                             inici = i+1;
                         }
                         else if(sym != null && sym.Type == 3){

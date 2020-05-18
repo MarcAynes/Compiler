@@ -17,7 +17,6 @@ public class Symbol {
     7 - selecció (IF/ELSE)
     8 - operador relacional
     9 - parèntesis
-
      */
 
     public Symbol(String reserved_Word, int Type){
